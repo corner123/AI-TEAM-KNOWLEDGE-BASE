@@ -65,3 +65,30 @@ def test_query_rewrite_expands_query():
     strategy.retrieve("原始查询", top_k=5)
 
     assert vector_store.search_dense.call_count >= 1
+
+
+def test_metadata_filter_strategy_name():
+    from rag_core.retrieval.metadata_filter import MetadataFilterStrategy
+    llm = MagicMock()
+    vector_store = MagicMock()
+    strategy = MetadataFilterStrategy(llm=llm, vector_store=vector_store)
+    assert strategy.get_strategy_name() == "MetadataFilter"
+
+def test_metadata_filter_extract_conditions():
+    from rag_core.retrieval.metadata_filter import MetadataFilterStrategy
+    llm = MagicMock()
+    llm.invoke.return_value = MagicMock(content='doc_type == "api_ref"\nhas_code == true')
+    vector_store = MagicMock()
+    strategy = MetadataFilterStrategy(llm=llm, vector_store=vector_store)
+    conditions = strategy._extract_conditions("LangChain的API文档")
+    assert "api_ref" in conditions
+
+def test_multimodal_strategy_name():
+    from rag_core.retrieval.multimodal_search import MultimodalSearchStrategy
+    strategy = MultimodalSearchStrategy.__new__(MultimodalSearchStrategy)
+    assert strategy.get_strategy_name() == "MultimodalSearch"
+
+def test_reranker_strategy_name():
+    from rag_core.retrieval.reranker import RerankerStrategy
+    strategy = RerankerStrategy.__new__(RerankerStrategy)
+    assert strategy.get_strategy_name() == "Rerank"
