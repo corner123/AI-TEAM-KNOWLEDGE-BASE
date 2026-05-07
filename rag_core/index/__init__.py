@@ -1,8 +1,4 @@
 from .embeddings import EmbeddingManager
-
-try:
-    from .vector_store import MilvusVectorStore
-except ImportError:
-    MilvusVectorStore = None
+from .vector_store import MilvusVectorStore
 
 __all__ = ["EmbeddingManager", "MilvusVectorStore"]
