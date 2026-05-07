@@ -1,0 +1,39 @@
+# RAG框架
+langchain>=0.3.0
+langchain-community>=0.3.0
+langchain-deepseek>=0.1.0
+langchain-huggingface>=0.1.0
+
+# 向量数据库
+pymilvus>=2.5.0
+
+# 嵌入模型
+sentence-transformers>=3.0.0
+transformers>=4.40.0
+torch>=2.0.0
+
+# 文档处理
+pypdf>=4.0.0
+unstructured>=0.15.0
+markdown>=3.5
+
+# 评估
+ragas>=0.2.0
+datasets>=2.19.0
+
+# Web UI
+gradio>=4.40.0
+
+# 工具
+python-dotenv>=1.0.0
+pydantic>=2.0.0
+pandas>=2.2.0
+numpy>=1.26.0
+tqdm>=4.66.0
+
+# 测试
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+
+# 日志
+loguru>=0.7.0
