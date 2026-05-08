@@ -1,0 +1,8 @@
+name,params_billions,accuracy_glue,speed_tokens_per_sec,task,release_date
+BERT-base,0.11,82.2,1500,text_classification,2018-10
+BERT-large,0.34,84.5,800,text_classification,2018-10
+GPT-3,175.0,87.1,50,text_generation,2020-05
+GPT-4,1800.0,92.0,20,text_generation,2023-03
+LLaMA-2-7B,7.0,78.5,2000,text_generation,2023-07
+LLaMA-2-13B,13.0,81.2,1200,text_generation,2023-07
+DeepSeek-7B,7.0,79.8,1800,text_generation,2024-01
