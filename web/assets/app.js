@@ -36,6 +36,7 @@
     mode: "retrieve",
     requestController: null,
     lastRequest: null,
+    disclosureTimers: new Map(),
   };
 
   const dom = {
@@ -51,6 +52,7 @@
     metricRevision: document.querySelector("#metric-revision"),
     metricAnswerProvider: document.querySelector("#metric-answer-provider"),
     metricAnswerModel: document.querySelector("#metric-answer-model"),
+    disclosureTriggers: [...document.querySelectorAll("[data-disclosure-target]")],
     modeButtons: [...document.querySelectorAll(".mode-button")],
     form: document.querySelector("#query-form"),
     queryInput: document.querySelector("#query-input"),
@@ -59,14 +61,19 @@
     topKInput: document.querySelector("#top-k-input"),
     topKDown: document.querySelector("#top-k-down"),
     topKUp: document.querySelector("#top-k-up"),
+    topKSummary: document.querySelector("#top-k-summary"),
+    tokenSettings: document.querySelector("#token-settings"),
     tokenInput: document.querySelector("#token-input"),
     toggleToken: document.querySelector("#toggle-token"),
+    exampleMenu: document.querySelector("#example-menu"),
     formError: document.querySelector("#form-error"),
     submitButton: document.querySelector("#submit-button"),
     submitLabel: document.querySelector("#submit-button .button-label"),
     cancelButton: document.querySelector("#cancel-button"),
     retryButton: document.querySelector("#retry-button"),
     resultPanel: document.querySelector(".result-panel"),
+    resultAnnouncer: document.querySelector("#result-announcer"),
+    resultHeadingTitle: document.querySelector("#result-heading-title"),
     requestTime: document.querySelector("#request-time"),
     emptyState: document.querySelector("#empty-state"),
     loadingState: document.querySelector("#loading-state"),
@@ -81,6 +88,7 @@
     evidenceLabel: document.querySelector("#evidence-label"),
     evidenceCount: document.querySelector("#evidence-count"),
     evidenceCaption: document.querySelector("#evidence-caption"),
+    evidenceDrawer: document.querySelector("#evidence-drawer"),
     evidenceList: document.querySelector("#evidence-list"),
     examples: [...document.querySelectorAll("[data-question]")],
   };
@@ -98,6 +106,107 @@
     if (className) node.className = className;
     if (text !== undefined && text !== null) node.textContent = String(text);
     return node;
+  }
+
+  function disclosurePanel(trigger) {
+    const id = trigger.getAttribute("aria-controls");
+    return id ? document.getElementById(id) : null;
+  }
+
+  function closeDisclosure(trigger, restoreFocus = false) {
+    const panel = disclosurePanel(trigger);
+    if (!panel) return;
+    window.clearTimeout(state.disclosureTimers.get(trigger));
+    trigger.dataset.pinned = "false";
+    trigger.setAttribute("aria-expanded", "false");
+    panel.hidden = true;
+    if (restoreFocus) {
+      trigger.dataset.suppressFocusOpen = "true";
+      trigger.focus();
+      window.setTimeout(() => delete trigger.dataset.suppressFocusOpen, 0);
+    }
+  }
+
+  function closeOtherDisclosures(activeTrigger) {
+    dom.disclosureTriggers.forEach((trigger) => {
+      if (trigger !== activeTrigger) closeDisclosure(trigger);
+    });
+  }
+
+  function openDisclosure(trigger, pinned = false) {
+    const panel = disclosurePanel(trigger);
+    if (!panel) return;
+    closeOtherDisclosures(trigger);
+    window.clearTimeout(state.disclosureTimers.get(trigger));
+    trigger.dataset.pinned = pinned ? "true" : trigger.dataset.pinned || "false";
+    trigger.setAttribute("aria-expanded", "true");
+    panel.hidden = false;
+  }
+
+  function scheduleDisclosureClose(trigger) {
+    if (trigger.dataset.pinned === "true") return;
+    window.clearTimeout(state.disclosureTimers.get(trigger));
+    const timer = window.setTimeout(() => {
+      const panel = disclosurePanel(trigger);
+      const focusedWithin = panel && panel.contains(document.activeElement);
+      if (!trigger.matches(":hover") && !panel?.matches(":hover") && !focusedWithin) {
+        closeDisclosure(trigger);
+      }
+    }, 160);
+    state.disclosureTimers.set(trigger, timer);
+  }
+
+  function setupDisclosures() {
+    const hoverCapable = window.matchMedia("(hover: hover) and (pointer: fine)");
+    dom.disclosureTriggers.forEach((trigger) => {
+      const panel = disclosurePanel(trigger);
+      if (!panel) return;
+      trigger.dataset.pinned = "false";
+      trigger.addEventListener("click", () => {
+        const expanded = trigger.getAttribute("aria-expanded") === "true";
+        if (expanded && trigger.dataset.pinned === "true") {
+          closeDisclosure(trigger);
+        } else {
+          openDisclosure(trigger, true);
+        }
+      });
+      trigger.addEventListener("focus", () => {
+        if (trigger.dataset.suppressFocusOpen !== "true") openDisclosure(trigger);
+      });
+      panel.addEventListener("focusin", () => openDisclosure(trigger));
+      panel.addEventListener("focusout", (event) => {
+        if (!panel.contains(event.relatedTarget) && event.relatedTarget !== trigger) {
+          scheduleDisclosureClose(trigger);
+        }
+      });
+      if (hoverCapable.matches) {
+        trigger.addEventListener("pointerenter", () => openDisclosure(trigger));
+        trigger.addEventListener("pointerleave", () => scheduleDisclosureClose(trigger));
+        panel.addEventListener("pointerenter", () => {
+          window.clearTimeout(state.disclosureTimers.get(trigger));
+        });
+        panel.addEventListener("pointerleave", () => scheduleDisclosureClose(trigger));
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      dom.disclosureTriggers.forEach((trigger) => {
+        const panel = disclosurePanel(trigger);
+        if (!trigger.contains(event.target) && !panel?.contains(event.target)) {
+          closeDisclosure(trigger);
+        }
+      });
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      const openTrigger = dom.disclosureTriggers.find(
+        (trigger) => trigger.getAttribute("aria-expanded") === "true",
+      );
+      if (openTrigger) {
+        event.preventDefault();
+        closeDisclosure(openTrigger, true);
+      }
+    });
   }
 
   function token() {
@@ -203,7 +312,8 @@
     dom.metricAnswerModel.textContent = "等待服务配置";
   }
 
-  async function checkHealth() {
+  async function checkHealth(options = {}) {
+    const focusOnAuth = options.focusOnAuth === true;
     dom.healthButton.disabled = true;
     dom.healthButton.textContent = "连接中…";
     setServiceStatus("pending", "加载服务中");
@@ -214,6 +324,9 @@
       if (error instanceof ApiError && error.status === 401) {
         setServiceStatus("warning", "需要访问令牌");
         resetHealthMetrics("请在查询面板填写令牌");
+        dom.tokenSettings.open = true;
+        dom.tokenSettings.classList.add("needs-attention");
+        if (focusOnAuth) dom.tokenInput.focus();
       } else {
         setServiceStatus("error", "服务不可用");
         resetHealthMetrics(redacted(error.message || "无法连接服务"));
@@ -236,6 +349,7 @@
       mode === "answer"
         ? "证据充分后按服务配置生成；在线失败时安全降级"
         : "问题会先经过证据路由";
+    dom.resultHeadingTitle.textContent = mode === "answer" ? "生成结果" : "检索结果";
   }
 
   function clampTopK(value) {
@@ -248,6 +362,7 @@
     const query = dom.queryInput.value.trim();
     const topK = clampTopK(dom.topKInput.value);
     dom.topKInput.value = String(topK);
+    dom.topKSummary.textContent = String(topK);
     if (!query) return { error: "请输入一个工程知识问题。" };
     if (query.length > 1000) return { error: "问题不能超过 1000 个字符。" };
     return { query, topK };
@@ -293,6 +408,11 @@
     dom.errorTitle.textContent = title;
     dom.errorMessage.textContent = message;
     showState("error");
+    dom.resultAnnouncer.textContent = `${title}。${message}`;
+    if (error instanceof ApiError && error.status === 401) {
+      dom.tokenSettings.open = true;
+      dom.tokenSettings.classList.add("needs-attention");
+    }
   }
 
   function summaryItem(label, value, stateClass = "") {
@@ -363,7 +483,9 @@
     const meta = element("div", "evidence-meta");
     metadataText(item).forEach((value) => meta.append(element("span", "", value)));
     title.append(meta);
-    summary.append(title, element("span", "expand-symbol", "+"));
+    const expand = element("span", "expand-symbol", "+");
+    expand.setAttribute("aria-hidden", "true");
+    summary.append(title, expand);
     card.append(summary);
 
     const rawContent = String(item.content || "").trim();
@@ -374,13 +496,35 @@
     return card;
   }
 
-  function renderCitation(citation) {
-    const card = element("article", "evidence-card citation-only");
+  function validCitationId(value) {
+    const id = String(value || "");
+    return /^E[1-9]\d*$/.test(id) ? id : null;
+  }
+
+  function citationTargetId(citationId) {
+    return `citation-${citationId}`;
+  }
+
+  function renderCitation(citation, index, usedIds) {
+    const card = document.createElement("details");
+    card.className = "evidence-card citation-only";
+    card.open = index === 0;
+    const citationId = validCitationId(citation.citation_id);
+    if (citationId && !usedIds.has(citationId)) {
+      usedIds.add(citationId);
+      card.id = citationTargetId(citationId);
+    } else {
+      card.id = `citation-card-${index + 1}`;
+    }
+
+    const summary = document.createElement("summary");
+    const title = element("div", "evidence-title");
     const top = element("div", "evidence-title-top");
     const role = citation.evidence_role || "supporting";
+    if (citationId) top.append(element("span", "citation-id-chip", citationId));
     top.append(element("span", `role-chip role-${role}`, roleLabel(role)));
     if (citation.live_verified === true) top.append(element("span", "live-chip", "LIVE VERIFIED"));
-    card.append(top, sourceNode(citation.source || "unknown source"));
+    title.append(top, sourceNode(citation.source || "unknown source"));
     const meta = element("div", "evidence-meta");
     const fields = [];
     if (citation.symbol) fields.push(`symbol: ${citation.symbol}`);
@@ -389,8 +533,126 @@
     }
     if (citation.revision) fields.push(`revision: ${shortHash(citation.revision)}`);
     fields.forEach((value) => meta.append(element("span", "", value)));
-    card.append(meta);
+    title.append(meta);
+    const expand = element("span", "expand-symbol", "+");
+    expand.setAttribute("aria-hidden", "true");
+    summary.append(title, expand);
+    card.append(summary);
+
+    const details = element("div", "citation-details");
+    details.append(
+      element("span", "", `证据角色：${roleLabel(role)}`),
+      element("span", "", `来源类型：${citation.authority || citation.corpus || "未标注"}`),
+    );
+    if (citation.branch) details.append(element("span", "", `分支：${citation.branch}`));
+    if (citation.source_version) {
+      details.append(element("span", "", `来源版本：${citation.source_version}`));
+    }
+    card.append(details);
     return card;
+  }
+
+  function focusCitation(citationId) {
+    const target = document.getElementById(citationTargetId(citationId));
+    if (!target) return;
+    dom.evidenceDrawer.open = true;
+    if (target instanceof HTMLDetailsElement) target.open = true;
+    document.querySelectorAll(".citation-target").forEach((node) => {
+      node.classList.remove("citation-target");
+    });
+    target.classList.add("citation-target");
+    target.scrollIntoView({
+      block: "center",
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+    });
+    const focusTarget = target.querySelector("summary") || target;
+    focusTarget.focus({ preventScroll: true });
+    window.setTimeout(() => target.classList.remove("citation-target"), 1800);
+  }
+
+  function appendAnswerInline(parent, value, allowedCitationIds) {
+    const text = String(value || "").replace(
+      /(\[E[1-9]\d*\])(?:[ \t]*\1)+/g,
+      "$1",
+    );
+    const tokenPattern = /(\[E[1-9]\d*\]|\*\*[^*\n]+\*\*|`[^`\n]+`)/g;
+    let cursor = 0;
+    let match = tokenPattern.exec(text);
+    while (match) {
+      if (match.index > cursor) parent.append(document.createTextNode(text.slice(cursor, match.index)));
+      const tokenValue = match[0];
+      if (tokenValue.startsWith("[E")) {
+        const citationId = tokenValue.slice(1, -1);
+        if (allowedCitationIds.has(citationId)) {
+          const link = element("a", "citation-ref", citationId);
+          link.href = `#${citationTargetId(citationId)}`;
+          link.setAttribute("aria-label", `查看回答引用 ${citationId}`);
+          link.addEventListener("click", (event) => {
+            event.preventDefault();
+            focusCitation(citationId);
+          });
+          parent.append(link);
+        } else {
+          parent.append(document.createTextNode(tokenValue));
+        }
+      } else if (tokenValue.startsWith("**")) {
+        parent.append(element("strong", "", tokenValue.slice(2, -2)));
+      } else {
+        parent.append(element("code", "", tokenValue.slice(1, -1)));
+      }
+      cursor = tokenPattern.lastIndex;
+      match = tokenPattern.exec(text);
+    }
+    if (cursor < text.length) parent.append(document.createTextNode(text.slice(cursor)));
+  }
+
+  function renderGroundedAnswer(rawAnswer, citations) {
+    dom.answerText.replaceChildren();
+    const answer = String(rawAnswer || "没有生成回答。");
+    const clipped = answer.length > 6_000
+      ? `${answer.slice(0, 6_000)}\n\n[页面展示已截断，请查看下方引用]`
+      : answer;
+    const allowedCitationIds = new Set(
+      (citations || []).map((item) => validCitationId(item.citation_id)).filter(Boolean),
+    );
+    let currentList = null;
+    let currentListType = null;
+
+    clipped.split(/\r?\n/).forEach((line) => {
+      const heading = line.match(/^(#{2,4})\s+(.+)$/);
+      const bullet = line.match(/^[-*]\s+(.+)$/);
+      const numbered = line.match(/^\d+[.)]\s+(.+)$/);
+      if (!line.trim()) {
+        currentList = null;
+        currentListType = null;
+        return;
+      }
+      if (heading) {
+        currentList = null;
+        currentListType = null;
+        const node = document.createElement(heading[1].length === 2 ? "h3" : "h4");
+        appendAnswerInline(node, heading[2], allowedCitationIds);
+        dom.answerText.append(node);
+        return;
+      }
+      if (bullet || numbered) {
+        const listType = numbered ? "ol" : "ul";
+        if (!currentList || currentListType !== listType) {
+          currentList = document.createElement(listType);
+          currentListType = listType;
+          dom.answerText.append(currentList);
+        }
+        const item = document.createElement("li");
+        appendAnswerInline(item, (bullet || numbered)[1], allowedCitationIds);
+        currentList.append(item);
+        return;
+      }
+      currentList = null;
+      currentListType = null;
+      const paragraph = document.createElement("p");
+      appendAnswerInline(paragraph, line, allowedCitationIds);
+      dom.answerText.append(paragraph);
+    });
   }
 
   function renderResponse(payload, mode, elapsedMs) {
@@ -437,29 +699,39 @@
       );
     }
 
-    dom.answerBlock.hidden = isRetrieve;
-    const rawAnswer = String(payload.answer || "没有生成回答。");
-    dom.answerText.textContent = isRetrieve
-      ? ""
-      : rawAnswer.length > 6_000
-        ? `${rawAnswer.slice(0, 6_000)}\n\n[页面展示已截断，请查看下方引用]`
-        : rawAnswer;
-
     const items = isRetrieve ? payload.results || [] : payload.citations || [];
+    dom.answerBlock.hidden = isRetrieve;
+    if (isRetrieve) {
+      dom.answerText.replaceChildren();
+    } else {
+      renderGroundedAnswer(payload.answer, items);
+    }
     dom.evidenceCount.textContent = String(items.length);
     dom.evidenceLabel.textContent = isRetrieve ? "证据列表" : "回答引用";
     dom.evidenceCaption.textContent = isRetrieve ? "按综合排名展示" : "用于约束上方摘要";
+    dom.evidenceDrawer.open = isRetrieve;
     dom.evidenceList.replaceChildren();
     if (!items.length) {
       dom.evidenceList.append(
         element("div", "no-evidence", "没有可展示的证据。请查看拒答原因或修改问题。"),
       );
     } else {
+      const usedCitationIds = new Set();
       items.forEach((item, index) => {
-        dom.evidenceList.append(isRetrieve ? renderEvidence(item, index) : renderCitation(item));
+        dom.evidenceList.append(
+          isRetrieve ? renderEvidence(item, index) : renderCitation(item, index, usedCitationIds),
+        );
       });
     }
     showState("response");
+    dom.resultAnnouncer.textContent = isRetrieve
+      ? `检索完成，共 ${items.length} 条证据。`
+      : payload.refused === true
+        ? "回答已安全拒绝，请查看拒答原因。"
+        : `回答完成，生成方式为 ${generationLabel}，包含 ${items.length} 条引用。`;
+    if (window.matchMedia("(max-width: 900px)").matches) {
+      dom.resultHeadingTitle.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
   }
 
   async function submitQuery(request = null) {
@@ -524,30 +796,43 @@
     button.addEventListener("click", () => {
       dom.queryInput.value = button.dataset.question || "";
       dom.queryCount.textContent = String(dom.queryInput.value.length);
+      dom.exampleMenu.open = false;
       dom.queryInput.focus();
     });
   });
 
   dom.topKDown.addEventListener("click", () => {
-    dom.topKInput.value = String(clampTopK(clampTopK(dom.topKInput.value) - 1));
+    const value = clampTopK(clampTopK(dom.topKInput.value) - 1);
+    dom.topKInput.value = String(value);
+    dom.topKSummary.textContent = String(value);
   });
   dom.topKUp.addEventListener("click", () => {
-    dom.topKInput.value = String(clampTopK(clampTopK(dom.topKInput.value) + 1));
+    const value = clampTopK(clampTopK(dom.topKInput.value) + 1);
+    dom.topKInput.value = String(value);
+    dom.topKSummary.textContent = String(value);
   });
   dom.topKInput.addEventListener("change", () => {
-    dom.topKInput.value = String(clampTopK(dom.topKInput.value));
+    const value = clampTopK(dom.topKInput.value);
+    dom.topKInput.value = String(value);
+    dom.topKSummary.textContent = String(value);
   });
 
   dom.toggleToken.addEventListener("click", () => {
     const show = dom.tokenInput.type === "password";
     dom.tokenInput.type = show ? "text" : "password";
     dom.toggleToken.textContent = show ? "隐藏" : "显示";
+    dom.toggleToken.setAttribute("aria-pressed", String(show));
+    dom.toggleToken.setAttribute("aria-label", show ? "隐藏本地访问令牌" : "显示本地访问令牌");
+  });
+
+  dom.tokenInput.addEventListener("input", () => {
+    dom.tokenSettings.classList.remove("needs-attention");
   });
 
   dom.tokenInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      checkHealth();
+      checkHealth({ focusOnAuth: false });
     }
   });
 
@@ -567,9 +852,12 @@
     }
   });
 
-  dom.healthButton.addEventListener("click", checkHealth);
+  dom.healthButton.addEventListener("click", () => checkHealth({ focusOnAuth: true }));
 
+  setupDisclosures();
+  dom.toggleToken.setAttribute("aria-pressed", "false");
+  dom.toggleToken.setAttribute("aria-label", "显示本地访问令牌");
   setMode("retrieve");
   showState("empty");
-  checkHealth();
+  checkHealth({ focusOnAuth: false });
 })();

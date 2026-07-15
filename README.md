@@ -132,9 +132,9 @@ $env:RAG_API_TOKEN = python -c "import secrets; print(secrets.token_urlsafe(32))
 python app.py
 ```
 
-浏览器打开 `http://127.0.0.1:8000/`，在页面的“本地访问令牌”中输入同一个 `RAG_API_TOKEN`。令牌只保留在当前页面内存中，不会写入 URL、HTML 或浏览器存储。首次健康检查需要加载本地 Embedding 模型，可能比后续请求慢。
+浏览器打开 `http://127.0.0.1:8000/`；若启用了鉴权，展开查询面板中的“连接设置”，输入同一个 `RAG_API_TOKEN`。令牌只保留在当前页面内存中，不会写入 URL、HTML 或浏览器存储。收到 401 时页面会自动展开并提示该设置。首次健康检查需要加载本地 Embedding 模型，可能比后续请求慢。
 
-页面是 RAG 仓库的只读观察与演示界面，只提供健康检查、证据检索和基于证据的回答；不会提供语料同步、索引构建、评测上传或修改 Mini-Nanobot 的入口。它使用仓库内的原生 HTML/CSS/JS，由 FastAPI 同源托管，不需要 Node、CDN 或 Gradio。
+页面是 RAG 仓库的只读观察与演示界面，只提供健康检查、证据检索和基于证据的回答；不会提供语料同步、索引构建、评测上传或修改 Mini-Nanobot 的入口。首屏保留提问与回答工作台，运行快照和证据责任说明位于顶部菜单，示例、Top-K 与连接设置按需展开；回答中的 `[E#]` 可直接定位并展开对应引用。它使用仓库内的原生 HTML/CSS/JS，由 FastAPI 同源托管，不需要 Node、CDN 或 Gradio。
 
 `ENGINEERING_GENERATION_PROVIDER` 有三种模式：
 

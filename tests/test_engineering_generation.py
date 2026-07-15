@@ -177,6 +177,21 @@ def test_model_prompt_has_separate_budget_and_redacts_absolute_paths():
     assert len(prompt) < 3_500
     assert "编号处理流程" in prompt
     assert "异常与边界" in prompt
+    assert "短段落或编号步骤" in prompt
+    assert "同一单元内由相同证据支持的连续事实只标一次" in prompt
+    assert "不要为了引用多样性" in prompt
+
+
+def test_repeated_citation_across_fact_units_remains_valid():
+    generated = "## 流程\n\n1. 初始化状态并注入上下文。[E1]\n2. 执行循环并保存状态。[E1]"
+
+    answer = GroundedAnswerer(
+        lambda _prompt: generated,
+        provider="deepseek",
+    ).answer(_retrieval())
+
+    assert answer.generation_mode == "model"
+    assert answer.answer.count("[E1]") == 2
 
 
 class _FakeCompletions:

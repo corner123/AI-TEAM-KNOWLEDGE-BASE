@@ -503,6 +503,11 @@ def test_frontend_is_static_same_origin_and_does_not_load_service():
     assert "https://" not in page.text
     assert "生成回答" in page.text
     assert 'id="metric-answer-provider"' in page.text
+    assert 'id="status-popover"' in page.text
+    assert 'id="about-popover"' in page.text
+    assert 'id="token-settings"' in page.text
+    assert 'id="evidence-drawer"' in page.text
+    assert 'class="answer-content"' in page.text
     assert "default-src 'self'" in page.headers["content-security-policy"]
     assert page.headers["x-frame-options"] == "DENY"
 
@@ -514,6 +519,16 @@ def test_frontend_is_static_same_origin_and_does_not_load_service():
     assert favicon.status_code == 200
     assert "localStorage" not in script.text
     assert "sessionStorage" not in script.text
+    for unsafe_dom_api in (
+        "innerHTML",
+        "outerHTML",
+        "insertAdjacentHTML",
+        "document.write",
+        "new Function",
+    ):
+        assert unsafe_dom_api not in script.text
+    assert "citation-ref" in script.text
+    assert "allowedCitationIds.has(citationId)" in script.text
     assert calls == 0
 
 

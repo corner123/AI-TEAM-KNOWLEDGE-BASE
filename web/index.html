@@ -14,69 +14,129 @@
   </head>
   <body>
     <header class="topbar">
-      <a class="brand" href="/" aria-label="返回工程知识检索台首页">
-        <span class="brand-mark" aria-hidden="true">EK</span>
-        <span>
-          <strong>Engineering Knowledge</strong>
-          <small>Evidence-first RAG</small>
-        </span>
-      </a>
-      <div class="service-control">
-        <span id="service-status" class="status-badge status-pending">
-          <span class="status-dot" aria-hidden="true"></span>
-          <span id="service-status-text">尚未连接</span>
-        </span>
-        <button id="health-button" class="button button-quiet" type="button">
-          检查服务
-        </button>
+      <div class="topbar-inner">
+        <a class="brand" href="/" aria-label="返回工程知识检索台首页">
+          <span class="brand-mark" aria-hidden="true">EK</span>
+          <span class="brand-copy">
+            <strong>Engineering Knowledge</strong>
+            <small>Evidence-first RAG</small>
+          </span>
+        </a>
+        <div class="service-control">
+          <span id="service-status" class="status-badge status-pending">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span id="service-status-text">尚未连接</span>
+          </span>
+          <button
+            class="topbar-menu-trigger"
+            type="button"
+            aria-expanded="false"
+            aria-controls="status-popover"
+            data-disclosure-target="status-popover"
+          >
+            系统状态
+          </button>
+          <button
+            class="topbar-menu-trigger about-trigger"
+            type="button"
+            aria-expanded="false"
+            aria-controls="about-popover"
+            data-disclosure-target="about-popover"
+          >
+            关于与证据规则
+          </button>
+          <button id="health-button" class="button button-quiet" type="button">
+            检查服务
+          </button>
+        </div>
+
+        <section id="status-popover" class="topbar-popover status-popover" hidden>
+          <div class="popover-heading">
+            <div>
+              <p class="panel-kicker">SYSTEM STATUS</p>
+              <h2>运行快照</h2>
+            </div>
+            <span>只读健康信息</span>
+          </div>
+          <div class="health-grid" aria-label="服务快照">
+            <article class="metric-card">
+              <span>索引构建</span>
+              <strong id="metric-build">—</strong>
+              <small id="metric-freshness">等待健康检查</small>
+            </article>
+            <article class="metric-card">
+              <span>知识分块</span>
+              <strong id="metric-documents">—</strong>
+              <small id="metric-partitions">— 个物理分区</small>
+            </article>
+            <article class="metric-card">
+              <span>实时核验</span>
+              <strong id="metric-live">—</strong>
+              <small>rg · AST · Git</small>
+            </article>
+            <article class="metric-card">
+              <span>Mini-Nanobot</span>
+              <strong id="metric-branch">—</strong>
+              <small id="metric-revision">等待工作区信息</small>
+            </article>
+            <article class="metric-card metric-card-wide">
+              <span>回答生成</span>
+              <strong id="metric-answer-provider">—</strong>
+              <small id="metric-answer-model">等待服务配置</small>
+            </article>
+          </div>
+        </section>
+
+        <section id="about-popover" class="topbar-popover about-popover" hidden>
+          <div class="popover-heading">
+            <div>
+              <p class="panel-kicker">EVIDENCE POLICY</p>
+              <h2>项目边界与证据责任</h2>
+            </div>
+            <span>只读观察台</span>
+          </div>
+          <p class="about-copy">
+            内部设计与历史决策由 RAG 检索，外部结论引用官方规范；涉及当前实现时，
+            系统回到 <code>rg</code>、AST 与 Git 实时核验。页面不会同步语料、构建索引或修改仓库。
+          </p>
+          <div class="legend-grid">
+            <article>
+              <span class="role-dot role-current"></span>
+              <strong>当前实现</strong>
+              <p>实时源码核验，证明当前工作区中的实际实现。</p>
+            </article>
+            <article>
+              <span class="role-dot role-design"></span>
+              <strong>内部设计</strong>
+              <p>说明架构意图与权衡，不单独证明代码已实现。</p>
+            </article>
+            <article>
+              <span class="role-dot role-history"></span>
+              <strong>历史记录</strong>
+              <p>说明演进过程，不代表当前版本仍保持相同行为。</p>
+            </article>
+            <article>
+              <span class="role-dot role-official"></span>
+              <strong>官方规范</strong>
+              <p>说明标准要求，不能反向证明项目已经符合。</p>
+            </article>
+          </div>
+        </section>
       </div>
     </header>
 
     <main class="page-shell">
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-copy">
+      <section class="intro-strip" aria-labelledby="hero-title">
+        <div>
           <p class="eyebrow">MINI-NANOBOT · MULTI-SOURCE RAG</p>
-          <h1 id="hero-title">工程知识，不只给答案，还给依据。</h1>
-          <p>
-            内部设计与历史决策由 RAG 检索，外部结论引用官方规范；涉及当前实现时，
-            系统会回到 <code>rg</code>、AST 与 Git 实时核验。
-          </p>
+          <h1 id="hero-title">工程知识检索台</h1>
+          <p>内部知识 RAG，外部官方规范补充；当前实现由 rg、AST 与 Git 实时核验。</p>
         </div>
-        <div class="hero-note">
-          <span class="note-index">01</span>
-          <div>
-            <strong>只读观察台</strong>
-            <p>页面不提供同步语料、构建索引或修改仓库的入口。</p>
-          </div>
+        <div class="intro-chips" aria-label="系统边界">
+          <span>只读</span>
+          <span>证据优先</span>
+          <span>可追溯引用</span>
         </div>
-      </section>
-
-      <section class="health-grid" aria-label="服务快照">
-        <article class="metric-card">
-          <span>索引构建</span>
-          <strong id="metric-build">—</strong>
-          <small id="metric-freshness">等待健康检查</small>
-        </article>
-        <article class="metric-card">
-          <span>知识分块</span>
-          <strong id="metric-documents">—</strong>
-          <small id="metric-partitions">— 个物理分区</small>
-        </article>
-        <article class="metric-card">
-          <span>实时核验</span>
-          <strong id="metric-live">—</strong>
-          <small>rg · AST · Git</small>
-        </article>
-        <article class="metric-card">
-          <span>Mini-Nanobot</span>
-          <strong id="metric-branch">—</strong>
-          <small id="metric-revision">等待工作区信息</small>
-        </article>
-        <article class="metric-card">
-          <span>回答生成</span>
-          <strong id="metric-answer-provider">—</strong>
-          <small id="metric-answer-model">等待服务配置</small>
-        </article>
       </section>
 
       <section class="workbench" aria-label="工程知识查询工作台">
@@ -113,7 +173,7 @@
             <textarea
               id="query-input"
               name="query"
-              rows="7"
+              rows="4"
               maxlength="1000"
               placeholder="例如：为什么 Mini-Nanobot 使用手写 ReAct 循环？"
               required
@@ -123,45 +183,50 @@
               <span><span id="query-count">0</span>/1000</span>
             </div>
 
-            <div class="examples" aria-label="示例问题">
-              <span>试一试</span>
-              <button
-                type="button"
-                data-question="为什么 Mini-Nanobot 使用手写 ReAct 循环？"
-              >
-                设计决策
-              </button>
-              <button
-                type="button"
-                data-question="当前 QueryEngine.submit_message 在哪个文件实现？"
-              >
-                当前实现
-              </button>
-              <button
-                type="button"
-                data-question="根据 MCP 2025-06-18 官方规范，tools/list 和 tools/call 是什么？"
-              >
-                官方规范
-              </button>
-              <button
-                type="button"
-                data-question="对比当前 MCPToolAdapter 与 MCP 官方 tools 规范是否一致？"
-              >
-                跨源比较
-              </button>
-            </div>
-
-            <div class="query-options">
-              <label for="top-k-input">证据数量</label>
-              <div class="number-control">
-                <button id="top-k-down" type="button" aria-label="减少证据数量">−</button>
-                <input id="top-k-input" type="number" min="1" max="20" value="5" />
-                <button id="top-k-up" type="button" aria-label="增加证据数量">+</button>
+            <details id="example-menu" class="compact-settings example-menu">
+              <summary>示例问题</summary>
+              <div class="examples" aria-label="示例问题">
+                <button
+                  type="button"
+                  data-question="为什么 Mini-Nanobot 使用手写 ReAct 循环？"
+                >
+                  设计决策
+                </button>
+                <button
+                  type="button"
+                  data-question="当前 QueryEngine.submit_message 在哪个文件实现？"
+                >
+                  当前实现
+                </button>
+                <button
+                  type="button"
+                  data-question="根据 MCP 2025-06-18 官方规范，tools/list 和 tools/call 是什么？"
+                >
+                  官方规范
+                </button>
+                <button
+                  type="button"
+                  data-question="对比当前 MCPToolAdapter 与 MCP 官方 tools 规范是否一致？"
+                >
+                  跨源比较
+                </button>
               </div>
-            </div>
+            </details>
 
-            <details class="token-settings">
-              <summary>本地访问令牌</summary>
+            <details class="compact-settings advanced-settings">
+              <summary>高级选项 <span>Top-K: <strong id="top-k-summary">5</strong></span></summary>
+              <div class="query-options">
+                <label for="top-k-input">证据数量</label>
+                <div class="number-control">
+                  <button id="top-k-down" type="button" aria-label="减少证据数量">−</button>
+                  <input id="top-k-input" type="number" min="1" max="20" value="5" />
+                  <button id="top-k-up" type="button" aria-label="增加证据数量">+</button>
+                </div>
+              </div>
+            </details>
+
+            <details id="token-settings" class="compact-settings token-settings">
+              <summary>连接设置 <span>仅启用令牌时填写</span></summary>
               <div class="token-row">
                 <input
                   id="token-input"
@@ -190,11 +255,12 @@
           </form>
         </aside>
 
-        <section class="result-panel panel" aria-live="polite" aria-busy="false">
+        <section class="result-panel panel" aria-busy="false">
+          <div id="result-announcer" class="visually-hidden" role="status" aria-live="polite"></div>
           <div class="panel-heading result-heading">
             <div>
               <p class="panel-kicker">EVIDENCE</p>
-              <h2>检索结果</h2>
+              <h2 id="result-heading-title" tabindex="-1">检索结果</h2>
             </div>
             <span id="request-time" class="request-time">—</span>
           </div>
@@ -232,47 +298,21 @@
             <div id="response-alerts" class="response-alerts"></div>
             <div id="answer-block" class="answer-block" hidden>
               <span>GROUNDED ANSWER</span>
-              <p id="answer-text"></p>
+              <div id="answer-text" class="answer-content"></div>
             </div>
-            <div class="evidence-heading">
-              <div>
-                <span id="evidence-label">证据列表</span>
-                <strong id="evidence-count">0</strong>
-              </div>
-              <p id="evidence-caption">按综合排名展示</p>
-            </div>
-            <div id="evidence-list" class="evidence-list"></div>
+            <details id="evidence-drawer" class="evidence-drawer" open>
+              <summary class="evidence-heading">
+                <div>
+                  <span id="evidence-label">证据列表</span>
+                  <strong id="evidence-count">0</strong>
+                </div>
+                <p id="evidence-caption">按综合排名展示</p>
+                <span class="drawer-symbol" aria-hidden="true">⌄</span>
+              </summary>
+              <div id="evidence-list" class="evidence-list"></div>
+            </details>
           </div>
         </section>
-      </section>
-
-      <section class="evidence-legend" aria-labelledby="legend-title">
-        <div>
-          <p class="panel-kicker">EVIDENCE ROLES</p>
-          <h2 id="legend-title">不同来源，承担不同证明责任</h2>
-        </div>
-        <div class="legend-grid">
-          <article>
-            <span class="role-dot role-current"></span>
-            <strong>当前实现</strong>
-            <p>必须经过实时源码核验，证明当前工作区中的实际实现。</p>
-          </article>
-          <article>
-            <span class="role-dot role-design"></span>
-            <strong>内部设计</strong>
-            <p>说明架构意图与权衡，不能单独证明代码已经实现。</p>
-          </article>
-          <article>
-            <span class="role-dot role-history"></span>
-            <strong>历史记录</strong>
-            <p>说明演进过程，不代表当前版本仍保持相同行为。</p>
-          </article>
-          <article>
-            <span class="role-dot role-official"></span>
-            <strong>官方规范</strong>
-            <p>说明标准要求，不能反向证明 Mini-Nanobot 已经符合。</p>
-          </article>
-        </div>
       </section>
     </main>
 
