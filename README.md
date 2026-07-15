@@ -5,7 +5,7 @@
 > 项目状态：可本地运行的工程实验系统，已提供 Web 演示、冻结评测记录和公开报告；它不是生产 SLA、安全认证或企业级部署证明。
 
 - 内部项目知识：README、架构文档、ADR、安全说明和 Git 历史；
-- 外部官方规范：MCP、LangGraph persistence、JSON Schema Draft 2020-12、Python 3.12 与 Docker 官方文档；
+- 外部官方规范：LangChain overview、MCP、LangGraph persistence、JSON Schema Draft 2020-12、Python 3.12 与 Docker 官方文档；
 - 当前源码事实：不把旧向量块当作最终证明，而是通过 `rg`、Python AST 与 Git 对 Mini-Nanobot 当前工作区实时核验。
 
 Mini-Nanobot 和本仓库始终是两个独立项目。Mini-Nanobot 负责 Agent 执行和实时代码搜索；本仓库负责知识采集、索引、检索、引用、拒答和评估。两者只通过只读 HTTP 接口 `POST /retrieve` 集成，Mini-Nanobot 将它注册为可选工具 `knowledge.search`。
@@ -109,6 +109,17 @@ python main.py engineering-build `
 python -m scripts.freeze_engineering_eval
 ```
 
+`data/sources/catalog.yaml` 是工程 RAG 实际使用的受控来源清单，其中 LangChain 仅采集 `docs.langchain.com` 的官方 Python overview。`data/raw/docs/` 下的历史下载文件不会自动进入工程索引。修改 catalog 后必须依次重新执行 `sources-sync` 和 `engineering-build`；只重启 `app.py` 不会更新语料。
+
+### 离线建库与在线提问不是同一步
+
+1. `sources-sync` 读取受控来源、解析文档并切分 chunk，结果写入 manifest；它不处理用户问题。
+2. `engineering-build` 对这些 chunk 批量计算 Embedding，并把向量索引、BM25 文本索引和来源元数据持久化到 `data/indexes/engineering/`。首次建库或语料变更后执行一次即可，不需要每次提问前重建。
+3. `app.py` 启动时只加载已经落盘的索引。每次提问只计算“问题本身”的一个查询向量，再结合 BM25、RRF、Evidence Guard，以及实现类问题需要的 `rg` / AST / Git 实时核验来选出证据。
+4. 页面中的“仅检索证据”调用 `/retrieve`，适合观察召回内容，不调用 DeepSeek；“检索并生成回答”直接调用 `/answer`，后端会自动先执行同一套检索和证据检查，再在证据充分时生成回答，因此不需要先点一次“仅检索证据”。
+
+也就是说，正常使用顺序是“语料更新后离线建库一次 → 启动服务 → 可以连续提问”；不是“每问一句就重新向量化全部文档”。
+
 索引使用跨进程 OS 文件锁、staging 校验、备份回滚和每个分区文件的 SHA-256；空 manifest、重复 chunk、来源错配或损坏文件会拒绝发布。锁文件路径保持稳定，进程退出时由操作系统释放锁，避免 PID 探测和空锁文件竞态。
 
 当前本地索引发布不提供无停机并发读取保证：目录替换期间，并发读者可能短暂看不到索引根目录。构建和发布最终快照时应暂停 API 读流量；若需要无停机部署，应在服务外使用不可变版本目录与原子版本指针，不能把当前备份回滚机制描述成生产级热切换。
@@ -183,6 +194,7 @@ python main.py serve --host 127.0.0.1 --port 8000
 | --- | --- | --- |
 | 当前实现 | `当前 QueryEngine.submit_message 在哪个文件实现？它的主要处理流程是什么？` | 路由到 implementation，返回 `LIVE VERIFIED` 源码、symbol、行号和引用 |
 | 内部设计 | `为什么 Mini-Nanobot 使用手写 ReAct 循环？` | 以 ADR/架构文档说明动机，代码只作补充证据 |
+| 官方框架概览 | `什么是 LangChain？` | 只引用受控的 LangChain 官方 Overview；大小写不同仍使用同一路由 |
 | 官方规范 | `根据 MCP 2025-06-18 官方规范，tools/list 和 tools/call 是什么？` | 只引用白名单官方规范，并声明不能反向证明项目已实现 |
 | 实现与规范比较 | `对比当前 MCPToolAdapter 与 MCP 官方 tools 规范是否一致？` | 同时要求实时实现与官方规范两侧证据，否则拒答 |
 | 超出范围 | `根据 Kubernetes 官方规范，PodSecurity admission 如何配置？` | 返回稳定的 out-of-scope 拒答，不用相似近邻猜测 |

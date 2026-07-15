@@ -14,9 +14,20 @@ _ANCHOR_RE = re.compile(
     r"[A-Z][A-Za-z0-9]*(?:[A-Z][A-Za-z0-9]*)+|[A-Z]{2,}|"
     r"Redis|Kafka|PostgreSQL|Kubernetes|OAuth|CQRS)\b"
 )
+_TOPIC_ANCHOR_RE = re.compile(
+    r"(?:什么是|介绍(?:一下)?|解释(?:一下)?|如何(?:使用|配置)|怎么(?:使用|配置)|"
+    r"what\s+is|define|explain|how\s+to\s+(?:use|configure))"
+    r"\s*[`\"'“”]?\s*([A-Za-z][A-Za-z0-9_.\-/]{2,})",
+    re.IGNORECASE,
+)
+_LATIN_WORD_RE = re.compile(r"\b[A-Za-z][A-Za-z0-9_-]{2,}\b")
 _GENERIC_ANCHORS = {
     "api", "cli", "rag", "agent", "mini-nanobot", "python", "json", "http",
     "url", "cpu", "mcp", "langgraph", "docker", "queryengine", "agentstate",
+    "what", "is", "are", "how", "why", "does", "do", "use", "uses", "using",
+    "define", "explain", "tell", "about", "the", "and", "for", "with", "from",
+    "project", "system", "framework", "library", "tool", "official", "docs",
+    "documentation", "current", "implementation", "design", "architecture",
 }
 _MISSING_EMPIRICAL_CLAIM = re.compile(
     r"(?:(?:成功率|准确率|Recall@\d+|吞吐量|失败恢复时间|月均故障率|"
@@ -181,12 +192,31 @@ def _missing_hard_anchors(
 
 def _hard_anchors(query: str) -> list[str]:
     anchors: list[str] = []
+    for match in _TOPIC_ANCHOR_RE.finditer(query):
+        value = match.group(1).strip()
+        if value.casefold() not in _GENERIC_ANCHORS:
+            anchors.append(value)
     for match in _ANCHOR_RE.finditer(query):
         value = (match.group(1) or match.group(0)).strip()
         folded = value.casefold()
         if folded in _GENERIC_ANCHORS or folded in {item.casefold() for item in anchors}:
             continue
         anchors.append(value)
+    # Lower-case framework and product names do not match the CamelCase branch
+    # above.  When a query contains exactly one distinctive Latin token, treat
+    # it as a required topic anchor instead of accepting an arbitrary nearest
+    # neighbour from an unrelated partition.
+    distinctive = []
+    for match in _LATIN_WORD_RE.finditer(query):
+        value = match.group(0)
+        folded = value.casefold()
+        if folded in _GENERIC_ANCHORS or folded in {
+            item.casefold() for item in anchors
+        }:
+            continue
+        distinctive.append(value)
+    if not anchors and len({item.casefold() for item in distinctive}) == 1:
+        anchors.append(distinctive[0])
     return anchors
 
 

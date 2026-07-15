@@ -16,6 +16,12 @@ from .models import AnswerOutcome, RetrievalOutcome
 Generator = Callable[[str], str]
 _LOGGER = logging.getLogger(__name__)
 _CITATION_RE = re.compile(r"\[E(\d+)\]")
+_MODEL_REFUSAL_RE = re.compile(
+    r"(?:无法|不能).{0,24}(?:直接回答|可靠回答|回答(?:该|这个|上述)?问题|"
+    r"给出.{0,16}(?:答案|定义|结论))|"
+    r"(?:insufficient\s+evidence|cannot\s+answer|unable\s+to\s+answer)",
+    re.IGNORECASE | re.DOTALL,
+)
 
 _REFUSALS: Final[dict[SourceIntent, str]] = {
     SourceIntent.IMPLEMENTATION: (
@@ -66,7 +72,7 @@ class GroundedAnswerer:
                 answer=_REFUSALS[retrieval.intent],
                 refused=True,
                 refusal_reason=retrieval.refusal_reason,
-                citations=retrieval.citations,
+                citations=[],
                 warnings=list(retrieval.warnings),
                 generation_mode="refusal",
                 generation_provider=self.provider,
@@ -84,6 +90,21 @@ class GroundedAnswerer:
                 return self._fallback(
                     retrieval,
                     warning="model_generation_failed_fallback_used",
+                )
+            if generated and self._model_declines_answer(generated):
+                return AnswerOutcome(
+                    query=retrieval.query,
+                    intent=retrieval.intent,
+                    answer=_REFUSALS[retrieval.intent],
+                    refused=True,
+                    refusal_reason="model_reported_insufficient_evidence",
+                    citations=[],
+                    warnings=[
+                        *retrieval.warnings,
+                        "model_reported_insufficient_evidence",
+                    ],
+                    generation_mode="refusal",
+                    generation_provider=self.provider,
                 )
             if generated and self._citations_are_valid(generated, retrieval):
                 return AnswerOutcome(
@@ -107,6 +128,13 @@ class GroundedAnswerer:
             )
 
         return self._fallback(retrieval)
+
+    @staticmethod
+    def _model_declines_answer(answer: str) -> bool:
+        """Recognize an explicit whole-answer refusal near the response lead."""
+
+        lead = answer.replace("**", "").strip()[:800]
+        return bool(_MODEL_REFUSAL_RE.search(lead))
 
     def _fallback(
         self, retrieval: RetrievalOutcome, *, warning: str | None = None

@@ -159,6 +159,20 @@ def test_insufficient_evidence_never_calls_model():
     generator.assert_not_called()
     assert answer.refused is True
     assert answer.generation_mode == "refusal"
+    assert answer.citations == []
+
+
+def test_model_text_refusal_is_returned_as_structured_refusal_without_citations():
+    answer = GroundedAnswerer(
+        lambda _prompt: "根据提供的证据，无法直接回答这个问题。[E1]",
+        provider="deepseek",
+    ).answer(_retrieval())
+
+    assert answer.refused is True
+    assert answer.refusal_reason == "model_reported_insufficient_evidence"
+    assert answer.generation_mode == "refusal"
+    assert answer.citations == []
+    assert "model_reported_insufficient_evidence" in answer.warnings
 
 
 def test_model_prompt_has_separate_budget_and_redacts_absolute_paths():

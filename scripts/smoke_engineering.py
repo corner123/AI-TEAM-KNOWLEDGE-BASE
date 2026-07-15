@@ -36,6 +36,11 @@ CASES = (
         ("external_normative",),
     ),
     SmokeCase(
+        "什么是 LangChain？",
+        "official",
+        ("external_normative",),
+    ),
+    SmokeCase(
         "对比当前 MCPToolAdapter 与 MCP 官方 tools 规范是否一致？",
         "comparison",
         ("current_implementation", "external_normative"),

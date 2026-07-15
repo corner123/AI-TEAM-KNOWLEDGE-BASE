@@ -23,6 +23,7 @@ from rag_core.engineering.index import (
     _recover_interrupted_publish,
     _release_build_lock,
 )
+from rag_core.engineering.sufficiency import EvidenceSufficiencyGuard
 from rag_core.ingestion import BuildManifest
 from rag_core.retrieval.engineering import (
     BM25Retriever,
@@ -405,6 +406,43 @@ def test_sufficiency_guard_rejects_uncatalogued_or_ungrounded_topics(tmp_path: P
     assert invented_design.sufficient_evidence is False
     assert any("CQRS" in warning for warning in invented_design.warnings)
 
+    unknown_framework = service.retrieve("什么是someunknownframework？")
+    assert unknown_framework.intent.value == "design"
+    assert unknown_framework.sufficient_evidence is False
+
+    guarded, warnings, reason = EvidenceSufficiencyGuard().check(
+        "什么是someunknownframework？",
+        unknown_framework.intent,
+        [
+            _result(
+                "选择 SQLite snapshot 是为了简单的本地恢复",
+                "docs/adr/0002.md",
+                corpus="internal",
+                authority="design",
+                metadata={"evidence_role": "internal_design"},
+            )
+        ],
+    )
+    assert guarded is False
+    assert reason == "unsupported_anchor"
+    assert any("someunknownframework" in warning for warning in warnings)
+
+
+@pytest.mark.parametrize("query", ["什么是langchain？", "什么是LangChain？"])
+def test_langchain_queries_use_official_scope_and_refuse_without_source(
+    tmp_path: Path, query: str
+):
+    service = _service(tmp_path)
+
+    retrieval = service.retrieve(query)
+    answer = service.answer(query)
+
+    assert retrieval.intent.value == "official"
+    assert retrieval.sufficient_evidence is False
+    assert retrieval.refusal_reason == "missing_official_evidence"
+    assert answer.refused is True
+    assert answer.citations == []
+
 
 def test_fastapi_health_retrieve_answer_and_optional_token(tmp_path: Path):
     app = create_app(_service(tmp_path), token="secret-token")
@@ -484,6 +522,28 @@ def test_fastapi_retrieve_never_calls_model_and_answer_failure_stays_available(
     assert "provider detail" not in str(payload)
 
 
+def test_answer_endpoint_performs_retrieval_without_a_prior_retrieve_request(
+    tmp_path: Path,
+):
+    service = _service(tmp_path)
+    original_retrieve = service.retrieve
+    retrieval_calls: list[tuple[str, int]] = []
+
+    def tracked_retrieve(query: str, *, top_k: int = 5):
+        retrieval_calls.append((query, top_k))
+        return original_retrieve(query, top_k=top_k)
+
+    service.retrieve = tracked_retrieve  # type: ignore[method-assign]
+    client = TestClient(create_app(service))
+    query = "当前 CheckpointStore 在哪里实现？"
+
+    answered = client.post("/answer", json={"query": query, "top_k": 3})
+
+    assert answered.status_code == 200
+    assert retrieval_calls == [(query, 3)]
+    assert answered.json()["citations"]
+
+
 def test_frontend_is_static_same_origin_and_does_not_load_service():
     calls = 0
 
@@ -501,7 +561,9 @@ def test_frontend_is_static_same_origin_and_does_not_load_service():
     assert "do-not-embed" not in page.text
     assert "http://" not in page.text
     assert "https://" not in page.text
-    assert "生成回答" in page.text
+    assert "仅检索证据" in page.text
+    assert "检索并生成回答" in page.text
+    assert "会自动执行检索，无需先点" in page.text
     assert 'id="metric-answer-provider"' in page.text
     assert 'id="status-popover"' in page.text
     assert 'id="about-popover"' in page.text
@@ -529,6 +591,9 @@ def test_frontend_is_static_same_origin_and_does_not_load_service():
         assert unsafe_dom_api not in script.text
     assert "citation-ref" in script.text
     assert "allowedCitationIds.has(citationId)" in script.text
+    assert 'requestJson(`/${activeRequest.mode}`' in script.text
+    assert 'mode === "answer" ? "检索并生成回答" : "仅检索证据"' in script.text
+    assert "会自动检索并生成回答，无需先点" in script.text
     assert calls == 0
 
 

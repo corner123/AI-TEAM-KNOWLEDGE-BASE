@@ -344,12 +344,12 @@
       button.classList.toggle("is-active", active);
       button.setAttribute("aria-pressed", String(active));
     });
-    dom.submitLabel.textContent = mode === "answer" ? "生成回答" : "开始检索";
+    dom.submitLabel.textContent = mode === "answer" ? "检索并生成回答" : "仅检索证据";
     dom.queryHint.textContent =
       mode === "answer"
-        ? "证据充分后按服务配置生成；在线失败时安全降级"
-        : "问题会先经过证据路由";
-    dom.resultHeadingTitle.textContent = mode === "answer" ? "生成结果" : "检索结果";
+        ? "会自动检索并生成回答，无需先点“仅检索证据”"
+        : "只返回证据列表，不生成回答";
+    dom.resultHeadingTitle.textContent = mode === "answer" ? "回答结果" : "检索结果";
   }
 
   function clampTopK(value) {

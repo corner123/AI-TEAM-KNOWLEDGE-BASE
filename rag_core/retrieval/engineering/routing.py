@@ -51,7 +51,7 @@ class SourceIntentRouter:
         re.IGNORECASE,
     )
     _official_topic = re.compile(
-        r"(?:\bMCP\b|Model\s+Context\s+Protocol|LangGraph|StateSnapshot|"
+        r"(?:\bMCP\b|Model\s+Context\s+Protocol|LangChain|LangGraph|StateSnapshot|"
         r"JSON\s+Schema|Draft\s+2020-12|Python\s+3\.12|asyncio(?:\.run)?|"
         r"pathlib(?:\.Path)?|sqlite3|subprocess|Docker)",
         re.IGNORECASE,

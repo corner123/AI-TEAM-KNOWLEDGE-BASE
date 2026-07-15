@@ -156,7 +156,7 @@
               data-mode="retrieve"
               aria-pressed="true"
             >
-              检索证据
+              仅检索证据
             </button>
             <button
               class="mode-button"
@@ -164,9 +164,12 @@
               data-mode="answer"
               aria-pressed="false"
             >
-              生成回答
+              检索并生成回答
             </button>
           </div>
+          <p class="mode-explanation">
+            “检索并生成回答”会自动执行检索，无需先点“仅检索证据”。
+          </p>
 
           <form id="query-form" novalidate>
             <label for="query-input">问题</label>
@@ -179,7 +182,7 @@
               required
             ></textarea>
             <div class="field-meta">
-              <span id="query-hint">问题会先经过证据路由</span>
+              <span id="query-hint">只返回证据列表，不生成回答</span>
               <span><span id="query-count">0</span>/1000</span>
             </div>
 
@@ -245,7 +248,7 @@
 
             <div class="query-actions">
               <button id="submit-button" class="button button-primary" type="submit">
-                <span class="button-label">开始检索</span>
+                <span class="button-label">仅检索证据</span>
                 <span class="button-arrow" aria-hidden="true">↗</span>
               </button>
               <button id="cancel-button" class="button button-secondary" type="button" hidden>

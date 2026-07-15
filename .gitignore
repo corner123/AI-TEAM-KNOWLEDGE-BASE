@@ -33,7 +33,6 @@ htmlcov/
 docs/superpowers/
 scripts/fetch_docs.sh
 data/sources/catalog.local.yaml
-data/sources/catalog.example.yaml
 *.safetensors
 *.pt
 *.pth

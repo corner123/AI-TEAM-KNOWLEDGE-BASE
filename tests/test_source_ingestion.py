@@ -290,6 +290,26 @@ sources:
     assert SourceCatalog.load(json_path).entries[0].source_type == "git"
 
 
+@pytest.mark.parametrize("catalog_name", ["catalog.yaml", "catalog.example.yaml"])
+def test_project_catalog_allowlists_langchain_official_overview(
+    catalog_name: str,
+) -> None:
+    catalog_path = Path(__file__).parents[1] / "data" / "sources" / catalog_name
+    catalog = SourceCatalog.load(catalog_path)
+    entries = {entry.source_id: entry for entry in catalog.entries}
+
+    langchain = entries["langchain_overview"]
+    assert langchain.source_type == "official_web"
+    assert langchain.options["allowed_domains"] == ["docs.langchain.com"]
+    assert langchain.options["urls"] == [
+        "https://docs.langchain.com/oss/python/langchain/overview"
+    ]
+    assert langchain.options["metadata"]["corpus"] == "official"
+    assert langchain.options["metadata"]["authority"] == "official"
+    assert "LangChain" in langchain.options["metadata"]["scope_aliases"]
+    assert "LangChain" in langchain.options["metadata"]["covered_topics"]
+
+
 def test_ingestion_pipeline_stable_ids_full_manifest_and_incremental_diff(tmp_path: Path) -> None:
     repository = _create_repository(tmp_path / "mini")
     (repository / "notes.md").write_text("# Notes\n\nKeep me initially.\n", encoding="utf-8")

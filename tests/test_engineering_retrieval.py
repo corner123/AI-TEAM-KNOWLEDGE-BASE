@@ -140,6 +140,8 @@ def test_federated_retriever_partitions_and_filters():
         ("当前 QueryEngine.submit_message 在哪个文件实现？", SourceIntent.IMPLEMENTATION),
         ("为什么 checkpoint 使用 snapshot 设计？", SourceIntent.DESIGN),
         ("根据 MCP 官方规范，client 初始化包含什么？", SourceIntent.OFFICIAL),
+        ("什么是langchain？", SourceIntent.OFFICIAL),
+        ("什么是LangChain？", SourceIntent.OFFICIAL),
         ("对比当前 MCPToolAdapter 与官方 MCP Client", SourceIntent.COMPARISON),
         ("今天上海天气如何？", SourceIntent.OUT_OF_SCOPE),
     ],

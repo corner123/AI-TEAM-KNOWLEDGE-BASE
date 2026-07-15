@@ -370,11 +370,18 @@ code {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4px;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
   padding: 4px;
   border: 1px solid var(--line);
   border-radius: 12px;
   background: #f0f1ed;
+}
+
+.mode-explanation {
+  margin: 0 2px 20px;
+  color: #78868b;
+  font-size: 11px;
+  line-height: 1.55;
 }
 
 .mode-button {
