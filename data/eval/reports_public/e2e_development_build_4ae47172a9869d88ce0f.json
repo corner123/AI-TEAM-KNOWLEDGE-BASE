@@ -1,0 +1,4201 @@
+{
+  "schema_version": "engineering-eval/v2",
+  "generated_at": "2026-07-14T18:08:20.134267+00:00",
+  "dataset": "mini_nanobot_internal.jsonl + official_engineering_specs.jsonl",
+  "question_count": 80,
+  "top_k": 5,
+  "baseline": "hybrid_live",
+  "suite": "e2e",
+  "run_metadata": {
+    "factory": "rag_core.evaluation.engineering_adapter:create_default_e2e_predictors",
+    "dataset_files": [
+      {
+        "name": "mini_nanobot_internal.jsonl",
+        "sha256": "d6e2cf0477a79ba695398ef6e81e3931546487c7380e3fcbd8b6d469eb288869"
+      },
+      {
+        "name": "official_engineering_specs.jsonl",
+        "sha256": "483a075194ffcdd873a2eaaa828d6f188bdcf9322b5398b8ece619240d9f7952"
+      }
+    ],
+    "dataset_roles": [
+      "development_regression"
+    ],
+    "label_versions": [
+      "engineering-eval/v2"
+    ],
+    "evaluation_snapshot": {
+      "datasets": [
+        {
+          "dataset_roles": [
+            "development_regression"
+          ],
+          "label_versions": [
+            "engineering-eval/v2"
+          ],
+          "name": "mini_nanobot_internal.jsonl",
+          "question_count": 60,
+          "sha256": "d6e2cf0477a79ba695398ef6e81e3931546487c7380e3fcbd8b6d469eb288869"
+        },
+        {
+          "dataset_roles": [
+            "development_regression"
+          ],
+          "label_versions": [
+            "engineering-eval/v2"
+          ],
+          "name": "official_engineering_specs.jsonl",
+          "question_count": 20,
+          "sha256": "483a075194ffcdd873a2eaaa828d6f188bdcf9322b5398b8ece619240d9f7952"
+        },
+        {
+          "dataset_roles": [
+            "holdout"
+          ],
+          "label_versions": [
+            "engineering-eval/v2"
+          ],
+          "name": "engineering_holdout_v2.jsonl",
+          "question_count": 30,
+          "sha256": "518214aa4e8fb942a6f8780f5627fd9452a97d7f6d503e49c482b9abde4bb52e"
+        }
+      ],
+      "manifest_build_id": "build_4ae47172a9869d88ce0f",
+      "mini_nanobot": {
+        "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+        "content_hash": "1344e6e2374825773b67b40b01d6dd1436e4ec08adf5f02a8b8a023e96fc115f",
+        "dirty": true,
+        "source_id": "mini_nanobot"
+      },
+      "schema_version": "engineering-eval-snapshot/v1",
+      "snapshot_path": "evaluation_snapshot.json",
+      "snapshot_sha256": "c1614fe1324f284d12a25ff9afa427b4e2e9cedca4493285351f3013a6b232b3"
+    },
+    "latency_scope": "warm_requests"
+  },
+  "strategy_metadata": {
+    "hybrid_live": {
+      "build_id": "build_4ae47172a9869d88ce0f",
+      "embedding_model": "BAAI/bge-small-zh-v1.5",
+      "document_count": 962,
+      "partitions": [
+        {
+          "corpus": "internal",
+          "authority": "code",
+          "directory": "internal__code",
+          "document_count": 485,
+          "weight": 1.35,
+          "file_sha256": {
+            "documents.json": "6c548940274b1797f5a636bac32104e7a067a92eb15b779ad7d7cb8fd8822a7f",
+            "index.faiss": "b2a066d603bf6bd58ae6c32ab85fda45ff73f4ac5e021af475a83672d638ce91",
+            "index_meta.json": "f9f89dd50c529cbeb192c8d6870c76880a2b16b4d36457ad3d575103485a2deb"
+          }
+        },
+        {
+          "corpus": "internal",
+          "authority": "design",
+          "directory": "internal__design",
+          "document_count": 35,
+          "weight": 1.0,
+          "file_sha256": {
+            "documents.json": "7855e4844cc6a91d2ef709fd356f52894d2bd26ce40c24e54c73b93202bc7362",
+            "index.faiss": "d4bc0ede22eea5f3c33899bdb550d9528532c826199d364336f9725d1c512dc7",
+            "index_meta.json": "5bad6bdad06b7d5533a6e5a107d27fc80c10851e52baaa8a55bfdacd3fe94b5b"
+          }
+        },
+        {
+          "corpus": "internal",
+          "authority": "history",
+          "directory": "internal__history",
+          "document_count": 10,
+          "weight": 0.8,
+          "file_sha256": {
+            "documents.json": "2c2059d6b0f4e7d05a35fb64ec689f4a0fbca0686ef8e50157ada0b940e879d4",
+            "index.faiss": "e7a7c35f7280bc4806ac92760ebcf178b1b313c48daa51972414619ac167680d",
+            "index_meta.json": "af5e57af3dd99e4b12241aaa1bda2a0120c7d0f972a7a9af08e9b21bce4b13d6"
+          }
+        },
+        {
+          "corpus": "internal",
+          "authority": "test",
+          "directory": "internal__test",
+          "document_count": 59,
+          "weight": 1.2,
+          "file_sha256": {
+            "documents.json": "3e050c12eb5360bac519354f1c1fe499636154449ae08e752ff04d62f876ef09",
+            "index.faiss": "a94529cb8e87f7af8fd8d8d18ec6a927dd6c4283c7179ca911943660e46a0883",
+            "index_meta.json": "23e74faa78a405da3562d4ad65969d4768d404d9952e7d4f742874d0c95243a4"
+          }
+        },
+        {
+          "corpus": "official",
+          "authority": "official",
+          "directory": "official__official",
+          "document_count": 373,
+          "weight": 0.9,
+          "file_sha256": {
+            "documents.json": "cc61d0965bb475eb558aac9128be5671d61da4e9db88a541d2eefe8001ede6b7",
+            "index.faiss": "729a34f408225ded426f872cce4b1c14bd43b681b6430a6912cebc0a7b79b375",
+            "index_meta.json": "fa2ca2ab836677c649ea70c7e38f92930235b5f6a673e9ad3fc384226276627c"
+          }
+        }
+      ],
+      "retrieval_strategy": "hybrid",
+      "oracle_route": false,
+      "live_verification": true,
+      "answer_generation": true,
+      "reranker": false,
+      "candidate_budget_multiplier": 3,
+      "partition_candidate_multiplier": 3,
+      "federated_candidate_multiplier": 3,
+      "fail_closed": true
+    }
+  },
+  "strategies": {
+    "hybrid_live": {
+      "strategy": "hybrid_live",
+      "top_k": 5,
+      "metrics": {
+        "routing_accuracy": 1.0,
+        "routing_macro_f1": 1.0,
+        "file_recall_at_k": 0.8857142857142857,
+        "primary_recall_at_k": 0.8857142857142857,
+        "hit_rate_at_k": 0.8857142857142857,
+        "primary_hit_at_k": 0.8857142857142857,
+        "supporting_recall_at_k": 0.20833333333333334,
+        "ndcg_at_k": 0.7041228931277608,
+        "citation_precision_at_k": 0.3786036036036036,
+        "symbol_recall_at_k": 0.20396825396825397,
+        "live_primary_hit_at_k": 0.7142857142857143,
+        "mrr": 0.780952380952381,
+        "unanswerable_refusal_rate": 1.0,
+        "answerable_refusal_rate": 0.05714285714285714,
+        "refusal_precision": 0.7142857142857143,
+        "refusal_recall": 1.0,
+        "refusal_f1": 0.8333333333333333,
+        "refusal_reason_accuracy": 1.0,
+        "strict_refusal_reason_recall": 1.0,
+        "mean_latency_ms": 362.9854749997321,
+        "p50_latency_ms": 127.12004999048077,
+        "p95_latency_ms": 1412.4025300261565,
+        "question_count": 80,
+        "routing_eligible_questions": 80,
+        "file_eligible_questions": 70,
+        "symbol_eligible_questions": 21,
+        "unanswerable_questions": 10
+      },
+      "details": [
+        {
+          "id": "MN-ARCH-001",
+          "category": "design_architecture",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.45819933371607996,
+          "citation_precision_at_k": 0.25,
+          "reciprocal_rank": 0.5,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/architecture/overview.md"
+          ],
+          "primary_sources": [
+            "docs/architecture/overview.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/core/query_engine.py",
+            "mini_nanobot/core/query.py"
+          ],
+          "retrieved_sources": [
+            "docs/architecture/execution-and-tools.md",
+            "docs/architecture/overview.md",
+            "docs/adr/0003-one-layer-subagent.md",
+            "mini_nanobot/core/subagent.py"
+          ],
+          "matched_sources": [
+            "docs/architecture/overview.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 123.41599998762831
+        },
+        {
+          "id": "MN-ARCH-002",
+          "category": "design_architecture",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.7262287617954056,
+          "citation_precision_at_k": 0.2,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/adr/0001-handwritten-react-loop.md"
+          ],
+          "primary_sources": [
+            "docs/adr/0001-handwritten-react-loop.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/core/query_engine.py",
+            "mini_nanobot/core/query.py"
+          ],
+          "retrieved_sources": [
+            "docs/adr/0001-handwritten-react-loop.md",
+            "docs/architecture/context-memory-checkpoint.md",
+            "docs/architecture/execution-and-tools.md",
+            "docs/README.md",
+            "mini_nanobot/tools/base.py"
+          ],
+          "matched_sources": [
+            "docs/adr/0001-handwritten-react-loop.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 148.60489999409765
+        },
+        {
+          "id": "MN-ARCH-003",
+          "category": "design_architecture",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.3333333333333333,
+          "ndcg_at_k": 0.634160219686138,
+          "citation_precision_at_k": 0.5,
+          "reciprocal_rank": 0.5,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/architecture/overview.md"
+          ],
+          "primary_sources": [
+            "docs/architecture/overview.md"
+          ],
+          "supporting_sources": [
+            "docs/adr/0001-handwritten-react-loop.md",
+            "mini_nanobot/core/graph.py",
+            "mini_nanobot/core/query_engine.py"
+          ],
+          "retrieved_sources": [
+            "docs/adr/0001-handwritten-react-loop.md",
+            "docs/architecture/overview.md",
+            "docs/architecture/knowledge-search-integration.md",
+            "mini_nanobot/core/graph.py#symbol:build_query_graph"
+          ],
+          "matched_sources": [
+            "docs/architecture/overview.md"
+          ],
+          "matched_supporting_sources": [
+            "docs/adr/0001-handwritten-react-loop.md"
+          ],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "build_query_graph"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 112.26929997792467
+        },
+        {
+          "id": "MN-ARCH-004",
+          "category": "design_architecture",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.6576630675781056,
+          "citation_precision_at_k": 0.25,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/architecture/overview.md"
+          ],
+          "primary_sources": [
+            "docs/architecture/overview.md"
+          ],
+          "supporting_sources": [
+            "docs/architecture/execution-and-tools.md",
+            "mini_nanobot/tools/mcp_adapter.py",
+            "mini_nanobot/tools/registry.py"
+          ],
+          "retrieved_sources": [
+            "docs/architecture/overview.md",
+            "docs/architecture/knowledge-search-integration.md",
+            "docs/README.md",
+            "mini_nanobot/tools/mcp_adapter.py#symbol:MCPToolAdapter"
+          ],
+          "matched_sources": [
+            "docs/architecture/overview.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "MCPToolAdapter"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 121.00719998124987
+        },
+        {
+          "id": "MN-ARCH-005",
+          "category": "design_architecture",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 0.0,
+          "primary_recall_at_k": 0.0,
+          "hit_rate_at_k": false,
+          "primary_hit_at_k": false,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "citation_precision_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/architecture/overview.md"
+          ],
+          "primary_sources": [
+            "docs/architecture/overview.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/llm/base.py",
+            "mini_nanobot/llm/openai_provider.py"
+          ],
+          "retrieved_sources": [
+            "docs/evaluation/benchmark-methodology.md",
+            "docs/architecture/execution-and-tools.md",
+            "docs/adr/0001-handwritten-react-loop.md",
+            "mini_nanobot/llm/base.py#symbol:RuleBasedLLM.generate"
+          ],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "RuleBasedLLM.generate",
+            "generate"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 121.92259996663779
+        },
+        {
+          "id": "MN-ARCH-006",
+          "category": "design_architecture",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 0.0,
+          "primary_recall_at_k": 0.0,
+          "hit_rate_at_k": false,
+          "primary_hit_at_k": false,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "citation_precision_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/architecture/execution-and-tools.md"
+          ],
+          "primary_sources": [
+            "docs/architecture/execution-and-tools.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/tools/registry.py"
+          ],
+          "retrieved_sources": [
+            "docs/architecture/overview.md",
+            "docs/adr/0003-one-layer-subagent.md",
+            "docs/README.md",
+            "mini_nanobot/llm/base.py#symbol:RuleBasedLLM"
+          ],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "RuleBasedLLM"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 139.3757999758236
+        },
+        {
+          "id": "MN-ARCH-007",
+          "category": "design_architecture",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.45819933371607996,
+          "citation_precision_at_k": 0.2,
+          "reciprocal_rank": 0.5,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/architecture/execution-and-tools.md"
+          ],
+          "primary_sources": [
+            "docs/architecture/execution-and-tools.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/tools/executor.py",
+            "mini_nanobot/core/query.py"
+          ],
+          "retrieved_sources": [
+            "docs/adr/0003-one-layer-subagent.md",
+            "docs/architecture/execution-and-tools.md",
+            "docs/architecture/knowledge-search-integration.md",
+            "docs/adr/0001-handwritten-react-loop.md",
+            "mini_nanobot/sandbox/executor.py#symbol:ShellSandboxExecutor.run"
+          ],
+          "matched_sources": [
+            "docs/architecture/execution-and-tools.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "ShellSandboxExecutor.run",
+            "run"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 139.56109998980537
+        },
+        {
+          "id": "MN-ARCH-008",
+          "category": "design_architecture",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.7262287617954056,
+          "citation_precision_at_k": 0.25,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/architecture/execution-and-tools.md"
+          ],
+          "primary_sources": [
+            "docs/architecture/execution-and-tools.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/tools/executor.py",
+            "mini_nanobot/tools/base.py"
+          ],
+          "retrieved_sources": [
+            "docs/architecture/execution-and-tools.md",
+            "docs/architecture/knowledge-search-integration.md",
+            "docs/adr/0003-one-layer-subagent.md",
+            "mini_nanobot/tools/executor.py#symbol:StreamingToolExecutor"
+          ],
+          "matched_sources": [
+            "docs/architecture/execution-and-tools.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "StreamingToolExecutor"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 135.76969999121502
+        },
+        {
+          "id": "MN-ARCH-009",
+          "category": "design_architecture",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.3333333333333333,
+          "ndcg_at_k": 0.7424693355471289,
+          "citation_precision_at_k": 0.4,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "primary_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/core/state.py",
+            "mini_nanobot/context/compressor.py",
+            "tests/test_checkpoint_context.py"
+          ],
+          "retrieved_sources": [
+            "docs/architecture/context-memory-checkpoint.md",
+            "docs/architecture/execution-and-tools.md",
+            "docs/architecture/knowledge-search-integration.md",
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md",
+            "mini_nanobot/context/compressor.py"
+          ],
+          "matched_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "matched_supporting_sources": [
+            "mini_nanobot/context/compressor.py"
+          ],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 120.27429998852313
+        },
+        {
+          "id": "MN-ARCH-010",
+          "category": "design_architecture",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.7262287617954056,
+          "citation_precision_at_k": 0.2,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "primary_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/core/prompts.py",
+            "mini_nanobot/core/query_engine.py"
+          ],
+          "retrieved_sources": [
+            "docs/architecture/context-memory-checkpoint.md",
+            "docs/architecture/knowledge-search-integration.md",
+            "docs/adr/0003-one-layer-subagent.md",
+            "docs/architecture/overview.md",
+            "mini_nanobot/core/prompts.py#symbol:SystemPromptBuilder.clear_cache"
+          ],
+          "matched_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "SystemPromptBuilder.clear_cache",
+            "clear_cache"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 149.37100000679493
+        },
+        {
+          "id": "MN-ARCH-011",
+          "category": "design_architecture",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.7262287617954056,
+          "citation_precision_at_k": 0.25,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/adr/0003-one-layer-subagent.md"
+          ],
+          "primary_sources": [
+            "docs/adr/0003-one-layer-subagent.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/core/subagent.py",
+            "mini_nanobot/tools/agent.py"
+          ],
+          "retrieved_sources": [
+            "docs/adr/0003-one-layer-subagent.md",
+            "docs/architecture/overview.md",
+            "docs/README.md",
+            "mini_nanobot/core/subagent.py#symbol:SubAgentRunner"
+          ],
+          "matched_sources": [
+            "docs/adr/0003-one-layer-subagent.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "SubAgentRunner"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 114.55800000112504
+        },
+        {
+          "id": "MN-ARCH-012",
+          "category": "design_architecture",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.7262287617954056,
+          "citation_precision_at_k": 0.25,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/architecture/overview.md"
+          ],
+          "primary_sources": [
+            "docs/architecture/overview.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/cli.py",
+            "mini_nanobot/core/query_engine.py"
+          ],
+          "retrieved_sources": [
+            "docs/architecture/overview.md",
+            "docs/evaluation/benchmark-methodology.md",
+            "docs/adr/0001-handwritten-react-loop.md",
+            "mini_nanobot/__main__.py"
+          ],
+          "matched_sources": [
+            "docs/architecture/overview.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 102.88059996673837
+        },
+        {
+          "id": "MN-ARCH-013",
+          "category": "design_architecture",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.6576630675781056,
+          "citation_precision_at_k": 0.25,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "primary_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/context/compressor.py",
+            "mini_nanobot/memory/long_term.py",
+            "mini_nanobot/memory/checkpoint.py"
+          ],
+          "retrieved_sources": [
+            "docs/architecture/context-memory-checkpoint.md",
+            "docs/adr/0001-handwritten-react-loop.md",
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md",
+            "mini_nanobot/core/query_engine.py#symbol:QueryEngine.__init__"
+          ],
+          "matched_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "QueryEngine.__init__",
+            "__init__"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 117.99190001329407
+        },
+        {
+          "id": "MN-ARCH-014",
+          "category": "design_architecture",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.6576630675781056,
+          "citation_precision_at_k": 0.2,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/architecture/overview.md"
+          ],
+          "primary_sources": [
+            "docs/architecture/overview.md"
+          ],
+          "supporting_sources": [
+            "docs/security/sandbox-and-permissions.md",
+            "docs/evaluation/benchmark-methodology.md",
+            "README.md"
+          ],
+          "retrieved_sources": [
+            "docs/architecture/overview.md",
+            "docs/adr/0001-handwritten-react-loop.md",
+            "docs/adr/0003-one-layer-subagent.md",
+            "docs/architecture/knowledge-search-integration.md",
+            "mini_nanobot/core/subagent.py#symbol:SubAgentRunner._run_child"
+          ],
+          "matched_sources": [
+            "docs/architecture/overview.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "SubAgentRunner._run_child",
+            "_run_child"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 124.80820005293936
+        },
+        {
+          "id": "MN-ARCH-015",
+          "category": "design_architecture",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.3333333333333333,
+          "ndcg_at_k": 0.634160219686138,
+          "citation_precision_at_k": 0.4,
+          "reciprocal_rank": 0.5,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/architecture/execution-and-tools.md"
+          ],
+          "primary_sources": [
+            "docs/architecture/execution-and-tools.md"
+          ],
+          "supporting_sources": [
+            "docs/architecture/context-memory-checkpoint.md",
+            "mini_nanobot/tools/executor.py",
+            "mini_nanobot/context/compressor.py"
+          ],
+          "retrieved_sources": [
+            "docs/architecture/context-memory-checkpoint.md",
+            "docs/architecture/execution-and-tools.md",
+            "docs/adr/0001-handwritten-react-loop.md",
+            "docs/evaluation/benchmark-methodology.md",
+            "mini_nanobot/cli.py"
+          ],
+          "matched_sources": [
+            "docs/architecture/execution-and-tools.md"
+          ],
+          "matched_supporting_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 118.04550001397729
+        },
+        {
+          "id": "MN-CODE-001",
+          "category": "code_symbol_call_chain",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.6576630675781056,
+          "citation_precision_at_k": 0.2,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 0.25,
+          "expected_sources": [
+            "mini_nanobot/core/query_engine.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/core/query_engine.py"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/core/prompts.py",
+            "mini_nanobot/core/query.py",
+            "mini_nanobot/core/state.py"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/core/query_engine.py",
+            "mini_nanobot/core/query_engine.py#symbol:QueryEngine.resume",
+            "mini_nanobot/core/query_engine.py#symbol:QueryEngine.submit_message",
+            "mini_nanobot/core/query_engine.py#symbol:QueryEngine",
+            "docs/architecture/overview.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/core/query_engine.py"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [
+            "QueryEngine.submit_message",
+            "QueryEngine._inject_dynamic_context",
+            "query",
+            "AgentState.add_message"
+          ],
+          "retrieved_symbols": [
+            "QueryEngine.submit_message",
+            "QueryEngine.resume",
+            "resume",
+            "QueryEngine.submit_message",
+            "submit_message",
+            "QueryEngine"
+          ],
+          "matched_symbols": [
+            "QueryEngine.submit_message"
+          ],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 971.1660000029951
+        },
+        {
+          "id": "MN-CODE-002",
+          "category": "code_symbol_call_chain",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.8262346571285599,
+          "citation_precision_at_k": 0.25,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 0.3333333333333333,
+          "expected_sources": [
+            "mini_nanobot/core/query_engine.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/core/query_engine.py"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/memory/checkpoint.py"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/core/query_engine.py",
+            "mini_nanobot/core/query_engine.py#symbol:QueryEngine.resume",
+            "mini_nanobot/cli.py#symbol:main",
+            "docs/architecture/overview.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/core/query_engine.py"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [
+            "QueryEngine.resume",
+            "SQLiteCheckpointStore.load",
+            "QueryEngine.submit_message"
+          ],
+          "retrieved_symbols": [
+            "QueryEngine.resume",
+            "QueryEngine.resume",
+            "resume",
+            "main",
+            "main"
+          ],
+          "matched_symbols": [
+            "QueryEngine.resume"
+          ],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 827.602899982594
+        },
+        {
+          "id": "MN-CODE-003",
+          "category": "code_symbol_call_chain",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.8262346571285599,
+          "citation_precision_at_k": 0.5,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 0.0,
+          "expected_sources": [
+            "mini_nanobot/core/query.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/core/query.py"
+          ],
+          "supporting_sources": [
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/core/query.py",
+            "docs/architecture/overview.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/core/query.py"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [
+            "query"
+          ],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 832.3077000095509
+        },
+        {
+          "id": "MN-CODE-004",
+          "category": "code_symbol_call_chain",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.5,
+          "ndcg_at_k": 0.878961873034099,
+          "citation_precision_at_k": 0.6666666666666666,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 1.0,
+          "expected_sources": [
+            "mini_nanobot/core/state.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/core/state.py"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/context/compressor.py",
+            "tests/test_checkpoint_context.py"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/core/state.py",
+            "mini_nanobot/context/compressor.py",
+            "docs/architecture/execution-and-tools.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/core/state.py"
+          ],
+          "matched_supporting_sources": [
+            "mini_nanobot/context/compressor.py"
+          ],
+          "expected_symbols": [
+            "AgentState.active_messages",
+            "AgentState.set_context_projection",
+            "AgentState.add_message"
+          ],
+          "retrieved_symbols": [
+            "AgentState.active_messages",
+            "AgentState.set_context_projection",
+            "AgentState.add_message"
+          ],
+          "matched_symbols": [
+            "AgentState.active_messages",
+            "AgentState.set_context_projection",
+            "AgentState.add_message"
+          ],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 1086.087299976498
+        },
+        {
+          "id": "MN-CODE-005",
+          "category": "code_symbol_call_chain",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 1.0,
+          "ndcg_at_k": 0.944847956559586,
+          "citation_precision_at_k": 0.4,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 0.0,
+          "expected_sources": [
+            "mini_nanobot/core/state.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/core/state.py"
+          ],
+          "supporting_sources": [
+            "tests/test_checkpoint_context.py"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/core/state.py",
+            "mini_nanobot/core/subagent.py",
+            "mini_nanobot/skills/loader.py",
+            "tests/test_checkpoint_context.py",
+            "docs/architecture/overview.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/core/state.py"
+          ],
+          "matched_supporting_sources": [
+            "tests/test_checkpoint_context.py"
+          ],
+          "expected_symbols": [
+            "AgentState.to_dict",
+            "AgentState.to_json",
+            "_json_safe_dict"
+          ],
+          "retrieved_symbols": [
+            "AgentState",
+            "SubAgentRunner",
+            "SkillManager"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 1393.0531000369228
+        },
+        {
+          "id": "MN-CODE-006",
+          "category": "code_symbol_call_chain",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.7262287617954056,
+          "citation_precision_at_k": 0.3333333333333333,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 0.25,
+          "expected_sources": [
+            "mini_nanobot/tools/registry.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/tools/registry.py"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/tools/base.py",
+            "mini_nanobot/tools/filesystem.py"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/tools/registry.py",
+            "tests/test_tools.py",
+            "docs/architecture/knowledge-search-integration.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/tools/registry.py"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [
+            "create_default_registry",
+            "ToolRegistry.extend",
+            "ToolRegistry.register",
+            "ToolRegistry.get"
+          ],
+          "retrieved_symbols": [
+            "create_default_registry"
+          ],
+          "matched_symbols": [
+            "create_default_registry"
+          ],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 1105.2879000199027
+        },
+        {
+          "id": "MN-CODE-007",
+          "category": "code_symbol_call_chain",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.8262346571285599,
+          "citation_precision_at_k": 0.2,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 0.5,
+          "expected_sources": [
+            "mini_nanobot/tools/executor.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/tools/executor.py"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/tools/base.py"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/tools/executor.py",
+            "mini_nanobot/tools/executor.py#symbol:StreamingToolExecutor.execute_many.flush_batch.guarded",
+            "mini_nanobot/tools/executor.py#symbol:StreamingToolExecutor.execute_many",
+            "mini_nanobot/tools/executor.py#symbol:StreamingToolExecutor",
+            "docs/architecture/execution-and-tools.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/tools/executor.py"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [
+            "StreamingToolExecutor.execute_many",
+            "StreamingToolExecutor.execute_one"
+          ],
+          "retrieved_symbols": [
+            "StreamingToolExecutor.execute_many",
+            "StreamingToolExecutor.execute_many.flush_batch.guarded",
+            "guarded",
+            "StreamingToolExecutor.execute_many",
+            "execute_many",
+            "StreamingToolExecutor"
+          ],
+          "matched_symbols": [
+            "StreamingToolExecutor.execute_many"
+          ],
+          "refused": true,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": "missing_empirical_evidence",
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 944.2948999931104
+        },
+        {
+          "id": "MN-CODE-008",
+          "category": "code_symbol_call_chain",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 0.0,
+          "primary_recall_at_k": 0.0,
+          "hit_rate_at_k": false,
+          "primary_hit_at_k": false,
+          "supporting_recall_at_k": 0.3333333333333333,
+          "ndcg_at_k": 0.21922102252603518,
+          "citation_precision_at_k": 0.3333333333333333,
+          "reciprocal_rank": 0.0,
+          "symbol_recall_at_k": 0.0,
+          "expected_sources": [
+            "mini_nanobot/tools/executor.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/tools/executor.py"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/tools/registry.py",
+            "mini_nanobot/hooks/manager.py",
+            "mini_nanobot/tools/base.py"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/tools/base.py",
+            "mini_nanobot/core/subagent.py",
+            "docs/architecture/execution-and-tools.md"
+          ],
+          "matched_sources": [],
+          "matched_supporting_sources": [
+            "mini_nanobot/tools/base.py"
+          ],
+          "expected_symbols": [
+            "StreamingToolExecutor.execute_one",
+            "ToolRegistry.get",
+            "Tool.validate_input",
+            "HookManager.check",
+            "Tool.check_permissions",
+            "Tool.run",
+            "StreamingToolExecutor._persist_if_large",
+            "HookManager.emit"
+          ],
+          "retrieved_symbols": [
+            "ToolResult"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": false,
+          "latency_ms": 1112.1829000185244
+        },
+        {
+          "id": "MN-CODE-009",
+          "category": "code_symbol_call_chain",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 0.0,
+          "primary_recall_at_k": 0.0,
+          "hit_rate_at_k": false,
+          "primary_hit_at_k": false,
+          "supporting_recall_at_k": 0.5,
+          "ndcg_at_k": 0.12103812696590094,
+          "citation_precision_at_k": 0.2,
+          "reciprocal_rank": 0.0,
+          "symbol_recall_at_k": 0.0,
+          "expected_sources": [
+            "mini_nanobot/tools/base.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/tools/base.py"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/tools/filesystem.py",
+            "mini_nanobot/tools/search.py"
+          ],
+          "retrieved_sources": [
+            "tests/test_tools.py",
+            "mini_nanobot/core/subagent.py",
+            "mini_nanobot/tools/filesystem.py",
+            "mini_nanobot/tools/knowledge.py",
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "matched_sources": [],
+          "matched_supporting_sources": [
+            "mini_nanobot/tools/filesystem.py"
+          ],
+          "expected_symbols": [
+            "ToolContext.resolve_workspace_path",
+            "FileReadTool.run",
+            "RgSearchTool.run"
+          ],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": false,
+          "latency_ms": 1417.970099952072
+        },
+        {
+          "id": "MN-CODE-010",
+          "category": "code_symbol_call_chain",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.5,
+          "ndcg_at_k": 0.878961873034099,
+          "citation_precision_at_k": 0.5,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 0.5,
+          "expected_sources": [
+            "mini_nanobot/llm/openai_provider.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/llm/openai_provider.py"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/llm/base.py",
+            "mini_nanobot/core/state.py"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/llm/openai_provider.py",
+            "mini_nanobot/core/state.py",
+            "tests/test_checkpoint_context.py",
+            "docs/architecture/execution-and-tools.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/llm/openai_provider.py"
+          ],
+          "matched_supporting_sources": [
+            "mini_nanobot/core/state.py"
+          ],
+          "expected_symbols": [
+            "OpenAIProvider.generate",
+            "Message",
+            "ToolCall",
+            "Usage"
+          ],
+          "retrieved_symbols": [
+            "OpenAIProvider.generate",
+            "Message"
+          ],
+          "matched_symbols": [
+            "OpenAIProvider.generate",
+            "Message"
+          ],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 1424.3393000215292
+        },
+        {
+          "id": "MN-CODE-011",
+          "category": "code_symbol_call_chain",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.45819933371607996,
+          "citation_precision_at_k": 0.3333333333333333,
+          "reciprocal_rank": 0.5,
+          "symbol_recall_at_k": 0.0,
+          "expected_sources": [
+            "mini_nanobot/skills/loader.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/skills/loader.py"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/skills/tool.py",
+            "mini_nanobot/core/query_engine.py"
+          ],
+          "retrieved_sources": [
+            "tests/test_memory_skills.py",
+            "mini_nanobot/skills/loader.py",
+            "docs/evaluation/benchmark-methodology.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/skills/loader.py"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [
+            "SkillManager.discover",
+            "SkillManager._parse_skill",
+            "SkillManager.render_attachment",
+            "SkillManager.load",
+            "QueryEngine._inject_dynamic_context",
+            "SkillTool.run"
+          ],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 1086.1597000039183
+        },
+        {
+          "id": "MN-CODE-012",
+          "category": "code_symbol_call_chain",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 1.0,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.4,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 0.25,
+          "expected_sources": [
+            "mini_nanobot/memory/long_term.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/memory/long_term.py"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/core/query_engine.py"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/memory/long_term.py",
+            "mini_nanobot/core/query_engine.py",
+            "mini_nanobot/core/query_engine.py#symbol:QueryEngine",
+            "mini_nanobot/memory/long_term.py#symbol:LongTermMemoryStore.index_attachment",
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/memory/long_term.py"
+          ],
+          "matched_supporting_sources": [
+            "mini_nanobot/core/query_engine.py"
+          ],
+          "expected_symbols": [
+            "QueryEngine._inject_dynamic_context",
+            "LongTermMemoryStore.recall_attachment",
+            "LongTermMemoryStore.recall",
+            "LongTermMemoryStore.records"
+          ],
+          "retrieved_symbols": [
+            "LongTermMemoryStore.recall_attachment",
+            "QueryEngine",
+            "LongTermMemoryStore.index_attachment",
+            "index_attachment"
+          ],
+          "matched_symbols": [
+            "LongTermMemoryStore.recall_attachment"
+          ],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 908.1450999947265
+        },
+        {
+          "id": "MN-CODE-013",
+          "category": "code_symbol_call_chain",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.25,
+          "ndcg_at_k": 0.7337495705923308,
+          "citation_precision_at_k": 0.6666666666666666,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 0.2,
+          "expected_sources": [
+            "mini_nanobot/tools/agent.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/tools/agent.py"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/core/subagent.py",
+            "mini_nanobot/core/query_engine.py",
+            "tests/test_query_engine.py",
+            "mini_nanobot/core/query.py"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/tools/agent.py",
+            "tests/test_query_engine.py",
+            "docs/adr/0003-one-layer-subagent.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/tools/agent.py"
+          ],
+          "matched_supporting_sources": [
+            "tests/test_query_engine.py"
+          ],
+          "expected_symbols": [
+            "AgentTool.run",
+            "SubAgentRunner.run",
+            "SubAgentRunner._run_child",
+            "query",
+            "SubAgentResult.to_tool_content"
+          ],
+          "retrieved_symbols": [
+            "AgentTool.run"
+          ],
+          "matched_symbols": [
+            "AgentTool.run"
+          ],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 1240.6473999726586
+        },
+        {
+          "id": "MN-CODE-014",
+          "category": "code_symbol_call_chain",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 0.0,
+          "primary_recall_at_k": 0.0,
+          "hit_rate_at_k": false,
+          "primary_hit_at_k": false,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "citation_precision_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "symbol_recall_at_k": 0.0,
+          "expected_sources": [
+            "mini_nanobot/core/subagent.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/core/subagent.py"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/tools/agent.py",
+            "tests/test_query_engine.py"
+          ],
+          "retrieved_sources": [
+            "tests/test_checkpoint_context.py",
+            "docs/adr/0003-one-layer-subagent.md"
+          ],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [
+            "SubAgentRunner.run",
+            "SubAgentRunner.status",
+            "SubAgentRunner._run_child",
+            "BackgroundSubAgent",
+            "AgentStatusTool.run"
+          ],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": "unsupported_anchor",
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": false,
+          "latency_ms": 862.3116000089794
+        },
+        {
+          "id": "MN-CODE-015",
+          "category": "code_symbol_call_chain",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.5,
+          "ndcg_at_k": 0.878961873034099,
+          "citation_precision_at_k": 0.5,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 0.0,
+          "expected_sources": [
+            "mini_nanobot/core/query_engine.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/core/query_engine.py"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/context/compressor.py",
+            "mini_nanobot/llm/base.py"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/core/query_engine.py",
+            "mini_nanobot/context/compressor.py",
+            "tests/test_query_engine.py",
+            "docs/architecture/execution-and-tools.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/core/query_engine.py"
+          ],
+          "matched_supporting_sources": [
+            "mini_nanobot/context/compressor.py"
+          ],
+          "expected_symbols": [
+            "QueryEngine.submit_message",
+            "QueryEngine._compact_with_summary_agent",
+            "ContextCompressor._autocompact_summary",
+            "ContextCompressor._summarize",
+            "LLMProvider.generate"
+          ],
+          "retrieved_symbols": [
+            "QueryEngine",
+            "ContextCompressor"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 1412.1095000300556
+        },
+        {
+          "id": "MN-SEC-001",
+          "category": "security_permissions",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.7262287617954056,
+          "citation_precision_at_k": 0.25,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "primary_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/cli.py",
+            "mini_nanobot/tools/base.py"
+          ],
+          "retrieved_sources": [
+            "docs/security/sandbox-and-permissions.md",
+            "docs/architecture/execution-and-tools.md",
+            "docs/adr/0003-one-layer-subagent.md",
+            "mini_nanobot/tools/base.py#symbol:PermissionLevel"
+          ],
+          "matched_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "PermissionLevel"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 126.06959999538958
+        },
+        {
+          "id": "MN-SEC-002",
+          "category": "security_permissions",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.45819933371607996,
+          "citation_precision_at_k": 0.25,
+          "reciprocal_rank": 0.5,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "primary_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/tools/base.py",
+            "mini_nanobot/tools/filesystem.py"
+          ],
+          "retrieved_sources": [
+            "docs/evaluation/benchmark-methodology.md",
+            "docs/security/sandbox-and-permissions.md",
+            "docs/architecture/execution-and-tools.md",
+            "mini_nanobot/core/subagent.py#symbol:SubAgentRunner._run_child"
+          ],
+          "matched_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "SubAgentRunner._run_child",
+            "_run_child"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 133.8539000134915
+        },
+        {
+          "id": "MN-SEC-003",
+          "category": "security_permissions",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 0.0,
+          "primary_recall_at_k": 0.0,
+          "hit_rate_at_k": false,
+          "primary_hit_at_k": false,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "citation_precision_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "symbol_recall_at_k": 0.0,
+          "expected_sources": [
+            "mini_nanobot/tools/shell.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/tools/shell.py"
+          ],
+          "supporting_sources": [
+            "docs/security/sandbox-and-permissions.md",
+            "mini_nanobot/sandbox/policy.py"
+          ],
+          "retrieved_sources": [
+            "tests/test_tools.py",
+            "mini_nanobot/core/subagent.py",
+            "docs/architecture/execution-and-tools.md"
+          ],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [
+            "ShellTool.check_permissions",
+            "CommandSafetyPolicy.inspect",
+            "CommandSafetyPolicy.is_read_only_command"
+          ],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": false,
+          "latency_ms": 1036.3835000316612
+        },
+        {
+          "id": "MN-SEC-004",
+          "category": "security_permissions",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.7262287617954056,
+          "citation_precision_at_k": 0.3333333333333333,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "primary_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/sandbox/policy.py",
+            "mini_nanobot/tools/shell.py"
+          ],
+          "retrieved_sources": [
+            "docs/security/sandbox-and-permissions.md",
+            "docs/README.md",
+            "mini_nanobot/tools/shell.py#symbol:ShellTool"
+          ],
+          "matched_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "ShellTool"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 126.7502999980934
+        },
+        {
+          "id": "MN-SEC-005",
+          "category": "security_permissions",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.8262346571285599,
+          "citation_precision_at_k": 0.25,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "primary_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/sandbox/executor.py"
+          ],
+          "retrieved_sources": [
+            "docs/security/sandbox-and-permissions.md",
+            "docs/architecture/overview.md",
+            "docs/architecture/knowledge-search-integration.md",
+            "mini_nanobot/core/subagent.py#symbol:SubAgentRunner._run_child"
+          ],
+          "matched_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "SubAgentRunner._run_child",
+            "_run_child"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 151.38719999231398
+        },
+        {
+          "id": "MN-SEC-006",
+          "category": "security_permissions",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.8262346571285599,
+          "citation_precision_at_k": 0.3333333333333333,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "primary_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/sandbox/executor.py"
+          ],
+          "retrieved_sources": [
+            "docs/security/sandbox-and-permissions.md",
+            "docs/architecture/execution-and-tools.md",
+            "mini_nanobot/tools/shell.py#symbol:ShellTool"
+          ],
+          "matched_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "ShellTool"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 190.13470003847033
+        },
+        {
+          "id": "MN-SEC-007",
+          "category": "security_permissions",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 0.0,
+          "primary_recall_at_k": 0.0,
+          "hit_rate_at_k": false,
+          "primary_hit_at_k": false,
+          "supporting_recall_at_k": 0.5,
+          "ndcg_at_k": 0.15273311123869335,
+          "citation_precision_at_k": 0.5,
+          "reciprocal_rank": 0.0,
+          "symbol_recall_at_k": 0.0,
+          "expected_sources": [
+            "mini_nanobot/core/subagent.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/core/subagent.py"
+          ],
+          "supporting_sources": [
+            "docs/adr/0003-one-layer-subagent.md",
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "retrieved_sources": [
+            "tests/test_checkpoint_context.py",
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "matched_sources": [],
+          "matched_supporting_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "expected_symbols": [
+            "SubAgentRunner._child_permissions",
+            "SubAgentRunner._allowed_tools",
+            "SubAgentRunner._child_registry"
+          ],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": false,
+          "latency_ms": 880.2969999960624
+        },
+        {
+          "id": "MN-SEC-008",
+          "category": "security_permissions",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.5,
+          "ndcg_at_k": 0.46737094873235197,
+          "citation_precision_at_k": 0.5,
+          "reciprocal_rank": 0.3333333333333333,
+          "symbol_recall_at_k": 0.0,
+          "expected_sources": [
+            "mini_nanobot/tools/shell.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/tools/shell.py"
+          ],
+          "supporting_sources": [
+            "docs/security/sandbox-and-permissions.md",
+            "mini_nanobot/sandbox/policy.py"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/cli.py",
+            "mini_nanobot/tools/base.py",
+            "mini_nanobot/tools/shell.py",
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/tools/shell.py"
+          ],
+          "matched_supporting_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "expected_symbols": [
+            "CommandSafetyPolicy.inspect",
+            "ShellTool.check_permissions"
+          ],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 1462.1159000089392
+        },
+        {
+          "id": "MN-SEC-009",
+          "category": "security_permissions",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.41493919716010286,
+          "citation_precision_at_k": 0.3333333333333333,
+          "reciprocal_rank": 0.5,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "primary_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/tools/git.py",
+            "mini_nanobot/tools/base.py",
+            "mini_nanobot/tools/registry.py"
+          ],
+          "retrieved_sources": [
+            "docs/architecture/knowledge-search-integration.md",
+            "docs/security/sandbox-and-permissions.md",
+            "mini_nanobot/tools/git.py#symbol:GitStatusTool"
+          ],
+          "matched_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "GitStatusTool"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 163.37229998316616
+        },
+        {
+          "id": "MN-SEC-010",
+          "category": "security_permissions",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.6576630675781056,
+          "citation_precision_at_k": 0.25,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "primary_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/sandbox/executor.py",
+            "mini_nanobot/sandbox/policy.py",
+            "docker/Dockerfile.sandbox"
+          ],
+          "retrieved_sources": [
+            "docs/security/sandbox-and-permissions.md",
+            "docs/README.md",
+            "docs/architecture/knowledge-search-integration.md",
+            "mini_nanobot/context/compressor.py#symbol:ContextCompressor.compress_if_needed"
+          ],
+          "matched_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "ContextCompressor.compress_if_needed",
+            "compress_if_needed"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 125.64199999906123
+        },
+        {
+          "id": "MN-STATE-001",
+          "category": "checkpoint_context_memory",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.45819933371607996,
+          "citation_precision_at_k": 0.3333333333333333,
+          "reciprocal_rank": 0.5,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md"
+          ],
+          "primary_sources": [
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/memory/checkpoint.py",
+            "mini_nanobot/core/state.py"
+          ],
+          "retrieved_sources": [
+            "docs/architecture/context-memory-checkpoint.md",
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md",
+            "mini_nanobot/memory/checkpoint.py#symbol:SQLiteCheckpointStore.append_event"
+          ],
+          "matched_sources": [
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "SQLiteCheckpointStore.append_event",
+            "append_event"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 131.72299996949732
+        },
+        {
+          "id": "MN-STATE-002",
+          "category": "checkpoint_context_memory",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 1.0,
+          "ndcg_at_k": 0.944847956559586,
+          "citation_precision_at_k": 0.5,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md"
+          ],
+          "primary_sources": [
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/core/query.py"
+          ],
+          "retrieved_sources": [
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md",
+            "docs/architecture/context-memory-checkpoint.md",
+            "docs/adr/0001-handwritten-react-loop.md",
+            "mini_nanobot/core/query.py"
+          ],
+          "matched_sources": [
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md"
+          ],
+          "matched_supporting_sources": [
+            "mini_nanobot/core/query.py"
+          ],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 143.3682000497356
+        },
+        {
+          "id": "MN-STATE-003",
+          "category": "checkpoint_context_memory",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 0.0,
+          "primary_recall_at_k": 0.0,
+          "hit_rate_at_k": false,
+          "primary_hit_at_k": false,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "citation_precision_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "symbol_recall_at_k": 0.0,
+          "expected_sources": [
+            "mini_nanobot/core/state.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/core/state.py"
+          ],
+          "supporting_sources": [
+            "docs/architecture/context-memory-checkpoint.md",
+            "mini_nanobot/core/query_engine.py",
+            "tests/test_checkpoint_context.py"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/core/subagent.py",
+            "mini_nanobot/cli.py",
+            "mini_nanobot/context/compressor.py",
+            "tests/test_query_engine.py",
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md"
+          ],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [
+            "AgentState.to_dict",
+            "AgentState.from_dict",
+            "_json_safe_dict",
+            "QueryEngine.submit_message"
+          ],
+          "retrieved_symbols": [
+            "SubAgentRunner._parent_attachment",
+            "main",
+            "ContextCompressor._recovery_attachment"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": false,
+          "latency_ms": 1523.0769999907352
+        },
+        {
+          "id": "MN-STATE-004",
+          "category": "checkpoint_context_memory",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.3333333333333333,
+          "ndcg_at_k": 0.5480525563150879,
+          "citation_precision_at_k": 0.5,
+          "reciprocal_rank": 0.3333333333333333,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "primary_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "supporting_sources": [
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md",
+            "mini_nanobot/core/state.py",
+            "mini_nanobot/core/query_engine.py"
+          ],
+          "retrieved_sources": [
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md",
+            "docs/architecture/execution-and-tools.md",
+            "docs/architecture/context-memory-checkpoint.md",
+            "mini_nanobot/context/compressor.py#symbol:ContextCompressor._recovery_attachment"
+          ],
+          "matched_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "matched_supporting_sources": [
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md"
+          ],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "ContextCompressor._recovery_attachment",
+            "_recovery_attachment"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 127.48979998286813
+        },
+        {
+          "id": "MN-STATE-005",
+          "category": "checkpoint_context_memory",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.5,
+          "ndcg_at_k": 0.819876640193745,
+          "citation_precision_at_k": 0.4,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "primary_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/context/compressor.py",
+            "mini_nanobot/tools/executor.py"
+          ],
+          "retrieved_sources": [
+            "docs/architecture/context-memory-checkpoint.md",
+            "docs/adr/0003-one-layer-subagent.md",
+            "docs/security/sandbox-and-permissions.md",
+            "docs/README.md",
+            "mini_nanobot/context/compressor.py"
+          ],
+          "matched_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "matched_supporting_sources": [
+            "mini_nanobot/context/compressor.py"
+          ],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 115.61159999109805
+        },
+        {
+          "id": "MN-STATE-006",
+          "category": "checkpoint_context_memory",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.8262346571285599,
+          "citation_precision_at_k": 0.25,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "primary_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/context/compressor.py"
+          ],
+          "retrieved_sources": [
+            "docs/architecture/context-memory-checkpoint.md",
+            "docs/security/sandbox-and-permissions.md",
+            "docs/architecture/knowledge-search-integration.md",
+            "mini_nanobot/context/compressor.py#symbol:ContextBudget.effective_window"
+          ],
+          "matched_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "ContextBudget.effective_window",
+            "effective_window"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 133.5006000008434
+        },
+        {
+          "id": "MN-STATE-007",
+          "category": "checkpoint_context_memory",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 1.0,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.6666666666666666,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 0.3333333333333333,
+          "expected_sources": [
+            "mini_nanobot/context/compressor.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/context/compressor.py"
+          ],
+          "supporting_sources": [
+            "tests/test_checkpoint_context.py"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/context/compressor.py",
+            "tests/test_checkpoint_context.py",
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/context/compressor.py"
+          ],
+          "matched_supporting_sources": [
+            "tests/test_checkpoint_context.py"
+          ],
+          "expected_symbols": [
+            "ContextCompressor._history_snip",
+            "ContextCompressor._older_duplicate_tool_indices",
+            "ContextCompressor._superseded_edit_indices"
+          ],
+          "retrieved_symbols": [
+            "ContextCompressor._history_snip",
+            "ContextCompressor"
+          ],
+          "matched_symbols": [
+            "ContextCompressor._history_snip"
+          ],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 1142.7239999757148
+        },
+        {
+          "id": "MN-STATE-008",
+          "category": "checkpoint_context_memory",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 1.0,
+          "ndcg_at_k": 0.9515234565959557,
+          "citation_precision_at_k": 0.75,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 0.6666666666666666,
+          "expected_sources": [
+            "mini_nanobot/context/compressor.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/context/compressor.py"
+          ],
+          "supporting_sources": [
+            "docs/architecture/context-memory-checkpoint.md",
+            "tests/test_checkpoint_context.py"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/context/compressor.py",
+            "mini_nanobot/core/prompts.py",
+            "tests/test_checkpoint_context.py",
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/context/compressor.py"
+          ],
+          "matched_supporting_sources": [
+            "docs/architecture/context-memory-checkpoint.md",
+            "tests/test_checkpoint_context.py"
+          ],
+          "expected_symbols": [
+            "ContextCompressor._microcompact",
+            "ContextCompressor._cache_reference_is_fresh",
+            "ContextCompressor._cache_reference_id"
+          ],
+          "retrieved_symbols": [
+            "ContextCompressor._microcompact",
+            "ContextCompressor._cache_reference_is_fresh",
+            "SystemPromptBuilder.clear_cache"
+          ],
+          "matched_symbols": [
+            "ContextCompressor._microcompact",
+            "ContextCompressor._cache_reference_is_fresh"
+          ],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 1219.2209999775514
+        },
+        {
+          "id": "MN-STATE-009",
+          "category": "checkpoint_context_memory",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.7262287617954056,
+          "citation_precision_at_k": 0.25,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "primary_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/context/compressor.py",
+            "mini_nanobot/core/query_engine.py"
+          ],
+          "retrieved_sources": [
+            "docs/architecture/context-memory-checkpoint.md",
+            "docs/architecture/execution-and-tools.md",
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md",
+            "mini_nanobot/context/compressor.py#symbol:ContextCompressor._context_collapse"
+          ],
+          "matched_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "ContextCompressor._context_collapse",
+            "_context_collapse"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 129.0910000097938
+        },
+        {
+          "id": "MN-STATE-010",
+          "category": "checkpoint_context_memory",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.7262287617954056,
+          "citation_precision_at_k": 0.25,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "primary_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/memory/long_term.py",
+            "tests/test_memory_skills.py"
+          ],
+          "retrieved_sources": [
+            "docs/architecture/context-memory-checkpoint.md",
+            "docs/evaluation/benchmark-methodology.md",
+            "docs/architecture/knowledge-search-integration.md",
+            "mini_nanobot/memory/long_term.py#symbol:LongTermMemoryStore"
+          ],
+          "matched_sources": [
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "LongTermMemoryStore"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 133.99309996748343
+        },
+        {
+          "id": "MN-BOUND-001",
+          "category": "unanswerable_boundary",
+          "answerable": false,
+          "expected_route": "out_of_scope",
+          "predicted_route": "out_of_scope",
+          "routing_correct": true,
+          "file_recall_at_k": null,
+          "primary_recall_at_k": null,
+          "hit_rate_at_k": null,
+          "primary_hit_at_k": null,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": null,
+          "citation_precision_at_k": null,
+          "reciprocal_rank": null,
+          "symbol_recall_at_k": null,
+          "expected_sources": [],
+          "primary_sources": [],
+          "supporting_sources": [],
+          "retrieved_sources": [],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": "dynamic_external_state_not_indexed",
+          "predicted_refusal_reason": "dynamic_external_state_not_indexed",
+          "refusal_reason_correct": true,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 0.05460000829771161
+        },
+        {
+          "id": "MN-BOUND-002",
+          "category": "unanswerable_boundary",
+          "answerable": false,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": null,
+          "primary_recall_at_k": null,
+          "hit_rate_at_k": null,
+          "primary_hit_at_k": null,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": null,
+          "citation_precision_at_k": 0.0,
+          "reciprocal_rank": null,
+          "symbol_recall_at_k": null,
+          "expected_sources": [],
+          "primary_sources": [],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "docs/evaluation/benchmark-methodology.md",
+            "docs/architecture/knowledge-search-integration.md",
+            "docs/adr/0001-handwritten-react-loop.md",
+            "mini_nanobot/cli.py"
+          ],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": "missing_empirical_evidence",
+          "predicted_refusal_reason": "missing_empirical_evidence",
+          "refusal_reason_correct": true,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 143.9935999806039
+        },
+        {
+          "id": "MN-BOUND-003",
+          "category": "unanswerable_boundary",
+          "answerable": false,
+          "expected_route": "out_of_scope",
+          "predicted_route": "out_of_scope",
+          "routing_correct": true,
+          "file_recall_at_k": null,
+          "primary_recall_at_k": null,
+          "hit_rate_at_k": null,
+          "primary_hit_at_k": null,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": null,
+          "citation_precision_at_k": null,
+          "reciprocal_rank": null,
+          "symbol_recall_at_k": null,
+          "expected_sources": [],
+          "primary_sources": [],
+          "supporting_sources": [],
+          "retrieved_sources": [],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": "future_commitment_not_documented",
+          "predicted_refusal_reason": "future_commitment_not_documented",
+          "refusal_reason_correct": true,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 0.10800000745803118
+        },
+        {
+          "id": "MN-BOUND-004",
+          "category": "unanswerable_boundary",
+          "answerable": false,
+          "expected_route": "out_of_scope",
+          "predicted_route": "out_of_scope",
+          "routing_correct": true,
+          "file_recall_at_k": null,
+          "primary_recall_at_k": null,
+          "hit_rate_at_k": null,
+          "primary_hit_at_k": null,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": null,
+          "citation_precision_at_k": null,
+          "reciprocal_rank": null,
+          "symbol_recall_at_k": null,
+          "expected_sources": [],
+          "primary_sources": [],
+          "supporting_sources": [],
+          "retrieved_sources": [],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": "missing_production_telemetry",
+          "predicted_refusal_reason": "missing_production_telemetry",
+          "refusal_reason_correct": true,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 0.0591999851167202
+        },
+        {
+          "id": "MN-BOUND-005",
+          "category": "unanswerable_boundary",
+          "answerable": false,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": null,
+          "primary_recall_at_k": null,
+          "hit_rate_at_k": null,
+          "primary_hit_at_k": null,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": null,
+          "citation_precision_at_k": 0.0,
+          "reciprocal_rank": null,
+          "symbol_recall_at_k": null,
+          "expected_sources": [],
+          "primary_sources": [],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "docs/security/sandbox-and-permissions.md",
+            "docs/architecture/knowledge-search-integration.md",
+            "docs/adr/0003-one-layer-subagent.md",
+            "mini_nanobot/sandbox/policy.py#symbol:CommandSafetyPolicy"
+          ],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "CommandSafetyPolicy"
+          ],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": "missing_independent_verification",
+          "predicted_refusal_reason": "missing_independent_verification",
+          "refusal_reason_correct": true,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 162.49959997367114
+        },
+        {
+          "id": "MN-BOUND-006",
+          "category": "unanswerable_boundary",
+          "answerable": false,
+          "expected_route": "out_of_scope",
+          "predicted_route": "out_of_scope",
+          "routing_correct": true,
+          "file_recall_at_k": null,
+          "primary_recall_at_k": null,
+          "hit_rate_at_k": null,
+          "primary_hit_at_k": null,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": null,
+          "citation_precision_at_k": null,
+          "reciprocal_rank": null,
+          "symbol_recall_at_k": null,
+          "expected_sources": [],
+          "primary_sources": [],
+          "supporting_sources": [],
+          "retrieved_sources": [],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": "underspecified_dynamic_cost",
+          "predicted_refusal_reason": "underspecified_dynamic_cost",
+          "refusal_reason_correct": true,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 0.04600000102072954
+        },
+        {
+          "id": "MN-BOUND-007",
+          "category": "unanswerable_boundary",
+          "answerable": false,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": null,
+          "primary_recall_at_k": null,
+          "hit_rate_at_k": null,
+          "primary_hit_at_k": null,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": null,
+          "citation_precision_at_k": 0.0,
+          "reciprocal_rank": null,
+          "symbol_recall_at_k": null,
+          "expected_sources": [],
+          "primary_sources": [],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "docs/adr/0003-one-layer-subagent.md",
+            "docs/architecture/context-memory-checkpoint.md",
+            "docs/evaluation/benchmark-methodology.md",
+            "mini_nanobot/core/subagent.py#symbol:SubAgentRunner"
+          ],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "SubAgentRunner"
+          ],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": "missing_empirical_evidence",
+          "predicted_refusal_reason": "missing_empirical_evidence",
+          "refusal_reason_correct": true,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 138.47589999204502
+        },
+        {
+          "id": "MN-BOUND-008",
+          "category": "unanswerable_boundary",
+          "answerable": false,
+          "expected_route": "out_of_scope",
+          "predicted_route": "out_of_scope",
+          "routing_correct": true,
+          "file_recall_at_k": null,
+          "primary_recall_at_k": null,
+          "hit_rate_at_k": null,
+          "primary_hit_at_k": null,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": null,
+          "citation_precision_at_k": null,
+          "reciprocal_rank": null,
+          "symbol_recall_at_k": null,
+          "expected_sources": [],
+          "primary_sources": [],
+          "supporting_sources": [],
+          "retrieved_sources": [],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": "future_commitment_not_documented",
+          "predicted_refusal_reason": "future_commitment_not_documented",
+          "refusal_reason_correct": true,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 0.0638000201433897
+        },
+        {
+          "id": "MN-BOUND-009",
+          "category": "unanswerable_boundary",
+          "answerable": false,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": null,
+          "primary_recall_at_k": null,
+          "hit_rate_at_k": null,
+          "primary_hit_at_k": null,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": null,
+          "citation_precision_at_k": 0.0,
+          "reciprocal_rank": null,
+          "symbol_recall_at_k": null,
+          "expected_sources": [],
+          "primary_sources": [],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "docs/architecture/context-memory-checkpoint.md",
+            "docs/evaluation/benchmark-methodology.md",
+            "mini_nanobot/memory/long_term.py#symbol:LongTermMemoryStore.recall"
+          ],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "LongTermMemoryStore.recall",
+            "recall"
+          ],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": "missing_empirical_evidence",
+          "predicted_refusal_reason": "missing_empirical_evidence",
+          "refusal_reason_correct": true,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 143.46510003088042
+        },
+        {
+          "id": "MN-BOUND-010",
+          "category": "unanswerable_boundary",
+          "answerable": false,
+          "expected_route": "out_of_scope",
+          "predicted_route": "out_of_scope",
+          "routing_correct": true,
+          "file_recall_at_k": null,
+          "primary_recall_at_k": null,
+          "hit_rate_at_k": null,
+          "primary_hit_at_k": null,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": null,
+          "citation_precision_at_k": null,
+          "reciprocal_rank": null,
+          "symbol_recall_at_k": null,
+          "expected_sources": [],
+          "primary_sources": [],
+          "supporting_sources": [],
+          "retrieved_sources": [],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": "unverifiable_private_information",
+          "predicted_refusal_reason": "unverifiable_private_information",
+          "refusal_reason_correct": true,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 0.05630002124235034
+        },
+        {
+          "id": "OFF-MCP-001",
+          "category": "official_protocol",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 0.6309297535714574,
+          "citation_precision_at_k": 0.3333333333333333,
+          "reciprocal_rank": 0.5,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle"
+          ],
+          "primary_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/index",
+            "https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle",
+            "https://modelcontextprotocol.io/specification/2025-06-18/server/tools"
+          ],
+          "matched_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 37.44169999845326
+        },
+        {
+          "id": "OFF-MCP-002",
+          "category": "official_protocol",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.3333333333333333,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle"
+          ],
+          "primary_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle",
+            "https://modelcontextprotocol.io/specification/2025-06-18/index",
+            "https://modelcontextprotocol.io/specification/2025-06-18/server/index"
+          ],
+          "matched_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 33.32470002351329
+        },
+        {
+          "id": "OFF-MCP-003",
+          "category": "official_protocol",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 0.6309297535714574,
+          "citation_precision_at_k": 0.3333333333333333,
+          "reciprocal_rank": 0.5,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/server/tools"
+          ],
+          "primary_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/server/tools"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/index",
+            "https://modelcontextprotocol.io/specification/2025-06-18/server/tools",
+            "https://modelcontextprotocol.io/specification/2025-06-18/server/index"
+          ],
+          "matched_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/server/tools"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 33.15650002332404
+        },
+        {
+          "id": "OFF-MCP-004",
+          "category": "official_protocol",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 0.6309297535714574,
+          "citation_precision_at_k": 0.2,
+          "reciprocal_rank": 0.5,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/server/tools"
+          ],
+          "primary_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/server/tools"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/index",
+            "https://modelcontextprotocol.io/specification/2025-06-18/server/tools",
+            "https://docs.python.org/3.12/library/sqlite3.html",
+            "https://docs.python.org/3.12/library/pathlib.html",
+            "https://docs.python.org/3.12/library/subprocess.html"
+          ],
+          "matched_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/server/tools"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 38.72000001138076
+        },
+        {
+          "id": "OFF-LG-001",
+          "category": "official_persistence",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.5,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://docs.langchain.com/oss/python/langgraph/persistence"
+          ],
+          "primary_sources": [
+            "https://docs.langchain.com/oss/python/langgraph/persistence"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://docs.langchain.com/oss/python/langgraph/persistence",
+            "https://docs.python.org/3.12/library/sqlite3.html"
+          ],
+          "matched_sources": [
+            "https://docs.langchain.com/oss/python/langgraph/persistence"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 39.383299998007715
+        },
+        {
+          "id": "OFF-LG-002",
+          "category": "official_persistence",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.5,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://docs.langchain.com/oss/python/langgraph/persistence"
+          ],
+          "primary_sources": [
+            "https://docs.langchain.com/oss/python/langgraph/persistence"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://docs.langchain.com/oss/python/langgraph/persistence",
+            "https://docs.python.org/3.12/library/sqlite3.html"
+          ],
+          "matched_sources": [
+            "https://docs.langchain.com/oss/python/langgraph/persistence"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 38.690000015776604
+        },
+        {
+          "id": "OFF-LG-003",
+          "category": "official_persistence",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.5,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://docs.langchain.com/oss/python/langgraph/persistence"
+          ],
+          "primary_sources": [
+            "https://docs.langchain.com/oss/python/langgraph/persistence"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://docs.langchain.com/oss/python/langgraph/persistence",
+            "https://docs.python.org/3.12/library/pathlib.html"
+          ],
+          "matched_sources": [
+            "https://docs.langchain.com/oss/python/langgraph/persistence"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": "source_not_catalogued",
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 37.926700024399906
+        },
+        {
+          "id": "OFF-LG-004",
+          "category": "official_persistence",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.5,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://docs.langchain.com/oss/python/langgraph/persistence"
+          ],
+          "primary_sources": [
+            "https://docs.langchain.com/oss/python/langgraph/persistence"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://docs.langchain.com/oss/python/langgraph/persistence",
+            "https://docs.python.org/3.12/library/sqlite3.html"
+          ],
+          "matched_sources": [
+            "https://docs.langchain.com/oss/python/langgraph/persistence"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 31.30790003342554
+        },
+        {
+          "id": "OFF-JS-001",
+          "category": "official_schema",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.5,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://json-schema.org/draft/2020-12/json-schema-core"
+          ],
+          "primary_sources": [
+            "https://json-schema.org/draft/2020-12/json-schema-core"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://json-schema.org/draft/2020-12/json-schema-core",
+            "https://json-schema.org/draft/2020-12"
+          ],
+          "matched_sources": [
+            "https://json-schema.org/draft/2020-12/json-schema-core"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 28.996900015044957
+        },
+        {
+          "id": "OFF-JS-002",
+          "category": "official_schema",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.5,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://json-schema.org/draft/2020-12/json-schema-core"
+          ],
+          "primary_sources": [
+            "https://json-schema.org/draft/2020-12/json-schema-core"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://json-schema.org/draft/2020-12/json-schema-core",
+            "https://json-schema.org/draft/2020-12"
+          ],
+          "matched_sources": [
+            "https://json-schema.org/draft/2020-12/json-schema-core"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 31.22339997207746
+        },
+        {
+          "id": "OFF-JS-003",
+          "category": "official_schema",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.5,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://json-schema.org/draft/2020-12/json-schema-core"
+          ],
+          "primary_sources": [
+            "https://json-schema.org/draft/2020-12/json-schema-core"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://json-schema.org/draft/2020-12/json-schema-core",
+            "https://json-schema.org/draft/2020-12"
+          ],
+          "matched_sources": [
+            "https://json-schema.org/draft/2020-12/json-schema-core"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 32.79219998512417
+        },
+        {
+          "id": "OFF-JS-004",
+          "category": "official_schema",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://json-schema.org/draft/2020-12/json-schema-core"
+          ],
+          "primary_sources": [
+            "https://json-schema.org/draft/2020-12/json-schema-core"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://json-schema.org/draft/2020-12/json-schema-core"
+          ],
+          "matched_sources": [
+            "https://json-schema.org/draft/2020-12/json-schema-core"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 35.84620001493022
+        },
+        {
+          "id": "OFF-PY-001",
+          "category": "official_python_runtime",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.3333333333333333,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://docs.python.org/3.12/library/subprocess.html"
+          ],
+          "primary_sources": [
+            "https://docs.python.org/3.12/library/subprocess.html"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://docs.python.org/3.12/library/subprocess.html",
+            "https://docs.python.org/3.12/library/asyncio-runner.html",
+            "https://docs.python.org/3.12/library/asyncio.html"
+          ],
+          "matched_sources": [
+            "https://docs.python.org/3.12/library/subprocess.html"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 32.85439999308437
+        },
+        {
+          "id": "OFF-PY-002",
+          "category": "official_python_runtime",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://docs.python.org/3.12/library/subprocess.html"
+          ],
+          "primary_sources": [
+            "https://docs.python.org/3.12/library/subprocess.html"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://docs.python.org/3.12/library/subprocess.html"
+          ],
+          "matched_sources": [
+            "https://docs.python.org/3.12/library/subprocess.html"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 40.965799998957664
+        },
+        {
+          "id": "OFF-PY-003",
+          "category": "official_python_runtime",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 0.6309297535714574,
+          "citation_precision_at_k": 0.5,
+          "reciprocal_rank": 0.5,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://docs.python.org/3.12/library/asyncio-runner.html"
+          ],
+          "primary_sources": [
+            "https://docs.python.org/3.12/library/asyncio-runner.html"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://docs.python.org/3.12/library/asyncio.html",
+            "https://docs.python.org/3.12/library/asyncio-runner.html"
+          ],
+          "matched_sources": [
+            "https://docs.python.org/3.12/library/asyncio-runner.html"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 38.7223000288941
+        },
+        {
+          "id": "OFF-PY-004",
+          "category": "official_python_runtime",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://docs.python.org/3.12/library/pathlib.html"
+          ],
+          "primary_sources": [
+            "https://docs.python.org/3.12/library/pathlib.html"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://docs.python.org/3.12/library/pathlib.html"
+          ],
+          "matched_sources": [
+            "https://docs.python.org/3.12/library/pathlib.html"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": "source_not_catalogued",
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 42.60819999035448
+        },
+        {
+          "id": "OFF-DKR-001",
+          "category": "official_container_security",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.5,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://docs.docker.com/engine/containers/resource_constraints/"
+          ],
+          "primary_sources": [
+            "https://docs.docker.com/engine/containers/resource_constraints/"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://docs.docker.com/engine/containers/resource_constraints/",
+            "https://docs.docker.com/engine/security/"
+          ],
+          "matched_sources": [
+            "https://docs.docker.com/engine/containers/resource_constraints/"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 49.160199996549636
+        },
+        {
+          "id": "OFF-DKR-002",
+          "category": "official_container_security",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://docs.docker.com/engine/containers/resource_constraints/"
+          ],
+          "primary_sources": [
+            "https://docs.docker.com/engine/containers/resource_constraints/"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://docs.docker.com/engine/containers/resource_constraints/"
+          ],
+          "matched_sources": [
+            "https://docs.docker.com/engine/containers/resource_constraints/"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 41.07789997942746
+        },
+        {
+          "id": "OFF-DKR-003",
+          "category": "official_container_security",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://docs.docker.com/engine/containers/resource_constraints/"
+          ],
+          "primary_sources": [
+            "https://docs.docker.com/engine/containers/resource_constraints/"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://docs.docker.com/engine/containers/resource_constraints/"
+          ],
+          "matched_sources": [
+            "https://docs.docker.com/engine/containers/resource_constraints/"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 34.61779997451231
+        },
+        {
+          "id": "OFF-DKR-004",
+          "category": "official_container_security",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://docs.docker.com/engine/security/"
+          ],
+          "primary_sources": [
+            "https://docs.docker.com/engine/security/"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://docs.docker.com/engine/security/"
+          ],
+          "matched_sources": [
+            "https://docs.docker.com/engine/security/"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 41.8725999770686
+        }
+      ]
+    }
+  },
+  "deltas_from_baseline": {
+    "hybrid_live": {
+      "routing_accuracy": 0.0,
+      "routing_macro_f1": 0.0,
+      "primary_recall_at_k": 0.0,
+      "primary_hit_at_k": 0.0,
+      "supporting_recall_at_k": 0.0,
+      "ndcg_at_k": 0.0,
+      "citation_precision_at_k": 0.0,
+      "symbol_recall_at_k": 0.0,
+      "mrr": 0.0,
+      "refusal_f1": 0.0,
+      "answerable_refusal_rate": 0.0,
+      "mean_latency_ms": 0.0
+    }
+  },
+  "publication_metadata": {
+    "path_sanitized": true,
+    "raw_report_name": "e2e_development_build_4ae47172a9869d88ce0f.json",
+    "raw_report_sha256": "be2a89f6b3b20f91a84be85cb190df1aa8f22536d2649a2c3ecc93fc996ec1de",
+    "metrics_unchanged": true,
+    "frozen_holdout_first_run": false
+  }
+}

@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Mini-Nanobot 多源工程知识 RAG 的只读检索与引用界面"
+    />
+    <title>工程知识检索台</title>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/app.css" />
+    <script src="/assets/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="返回工程知识检索台首页">
+        <span class="brand-mark" aria-hidden="true">EK</span>
+        <span>
+          <strong>Engineering Knowledge</strong>
+          <small>Evidence-first RAG</small>
+        </span>
+      </a>
+      <div class="service-control">
+        <span id="service-status" class="status-badge status-pending">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span id="service-status-text">尚未连接</span>
+        </span>
+        <button id="health-button" class="button button-quiet" type="button">
+          检查服务
+        </button>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">MINI-NANOBOT · MULTI-SOURCE RAG</p>
+          <h1 id="hero-title">工程知识，不只给答案，还给依据。</h1>
+          <p>
+            内部设计与历史决策由 RAG 检索，外部结论引用官方规范；涉及当前实现时，
+            系统会回到 <code>rg</code>、AST 与 Git 实时核验。
+          </p>
+        </div>
+        <div class="hero-note">
+          <span class="note-index">01</span>
+          <div>
+            <strong>只读观察台</strong>
+            <p>页面不提供同步语料、构建索引或修改仓库的入口。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="health-grid" aria-label="服务快照">
+        <article class="metric-card">
+          <span>索引构建</span>
+          <strong id="metric-build">—</strong>
+          <small id="metric-freshness">等待健康检查</small>
+        </article>
+        <article class="metric-card">
+          <span>知识分块</span>
+          <strong id="metric-documents">—</strong>
+          <small id="metric-partitions">— 个物理分区</small>
+        </article>
+        <article class="metric-card">
+          <span>实时核验</span>
+          <strong id="metric-live">—</strong>
+          <small>rg · AST · Git</small>
+        </article>
+        <article class="metric-card">
+          <span>Mini-Nanobot</span>
+          <strong id="metric-branch">—</strong>
+          <small id="metric-revision">等待工作区信息</small>
+        </article>
+        <article class="metric-card">
+          <span>回答生成</span>
+          <strong id="metric-answer-provider">—</strong>
+          <small id="metric-answer-model">等待服务配置</small>
+        </article>
+      </section>
+
+      <section class="workbench" aria-label="工程知识查询工作台">
+        <aside class="query-panel panel">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">QUERY</p>
+              <h2>提出工程问题</h2>
+            </div>
+            <span class="shortcut" title="键盘快捷键">Ctrl ↵</span>
+          </div>
+
+          <div class="mode-switch" role="group" aria-label="查询模式">
+            <button
+              class="mode-button is-active"
+              type="button"
+              data-mode="retrieve"
+              aria-pressed="true"
+            >
+              检索证据
+            </button>
+            <button
+              class="mode-button"
+              type="button"
+              data-mode="answer"
+              aria-pressed="false"
+            >
+              生成回答
+            </button>
+          </div>
+
+          <form id="query-form" novalidate>
+            <label for="query-input">问题</label>
+            <textarea
+              id="query-input"
+              name="query"
+              rows="7"
+              maxlength="1000"
+              placeholder="例如：为什么 Mini-Nanobot 使用手写 ReAct 循环？"
+              required
+            ></textarea>
+            <div class="field-meta">
+              <span id="query-hint">问题会先经过证据路由</span>
+              <span><span id="query-count">0</span>/1000</span>
+            </div>
+
+            <div class="examples" aria-label="示例问题">
+              <span>试一试</span>
+              <button
+                type="button"
+                data-question="为什么 Mini-Nanobot 使用手写 ReAct 循环？"
+              >
+                设计决策
+              </button>
+              <button
+                type="button"
+                data-question="当前 QueryEngine.submit_message 在哪个文件实现？"
+              >
+                当前实现
+              </button>
+              <button
+                type="button"
+                data-question="根据 MCP 2025-06-18 官方规范，tools/list 和 tools/call 是什么？"
+              >
+                官方规范
+              </button>
+              <button
+                type="button"
+                data-question="对比当前 MCPToolAdapter 与 MCP 官方 tools 规范是否一致？"
+              >
+                跨源比较
+              </button>
+            </div>
+
+            <div class="query-options">
+              <label for="top-k-input">证据数量</label>
+              <div class="number-control">
+                <button id="top-k-down" type="button" aria-label="减少证据数量">−</button>
+                <input id="top-k-input" type="number" min="1" max="20" value="5" />
+                <button id="top-k-up" type="button" aria-label="增加证据数量">+</button>
+              </div>
+            </div>
+
+            <details class="token-settings">
+              <summary>本地访问令牌</summary>
+              <div class="token-row">
+                <input
+                  id="token-input"
+                  type="password"
+                  autocomplete="off"
+                  spellcheck="false"
+                  placeholder="仅当服务启用 RAG_API_TOKEN 时填写"
+                  aria-label="本地 RAG API 访问令牌"
+                />
+                <button id="toggle-token" type="button">显示</button>
+              </div>
+              <p>令牌只保留在当前页面内存中，不写入 URL 或浏览器存储。</p>
+            </details>
+
+            <p id="form-error" class="form-error" role="alert" hidden></p>
+
+            <div class="query-actions">
+              <button id="submit-button" class="button button-primary" type="submit">
+                <span class="button-label">开始检索</span>
+                <span class="button-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button id="cancel-button" class="button button-secondary" type="button" hidden>
+                取消
+              </button>
+            </div>
+          </form>
+        </aside>
+
+        <section class="result-panel panel" aria-live="polite" aria-busy="false">
+          <div class="panel-heading result-heading">
+            <div>
+              <p class="panel-kicker">EVIDENCE</p>
+              <h2>检索结果</h2>
+            </div>
+            <span id="request-time" class="request-time">—</span>
+          </div>
+
+          <div id="empty-state" class="empty-state">
+            <div class="empty-symbol" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <h3>等待一个值得验证的问题</h3>
+            <p>
+              结果会显示路由类型、证据充分性、实时核验状态、引用来源和拒答原因。
+            </p>
+          </div>
+
+          <div id="loading-state" class="loading-state" hidden>
+            <div class="loading-line"><span></span></div>
+            <div class="loading-line short"><span></span></div>
+            <div class="loading-cards">
+              <span></span><span></span><span></span>
+            </div>
+            <p>正在检索并检查证据边界，首次加载模型可能需要一些时间……</p>
+          </div>
+
+          <div id="error-state" class="error-state" hidden>
+            <span class="error-code">REQUEST FAILED</span>
+            <h3 id="error-title">服务暂时不可用</h3>
+            <p id="error-message"></p>
+            <button id="retry-button" class="button button-secondary" type="button">
+              重试上次请求
+            </button>
+          </div>
+
+          <div id="response-state" hidden>
+            <div id="response-summary" class="response-summary"></div>
+            <div id="response-alerts" class="response-alerts"></div>
+            <div id="answer-block" class="answer-block" hidden>
+              <span>GROUNDED ANSWER</span>
+              <p id="answer-text"></p>
+            </div>
+            <div class="evidence-heading">
+              <div>
+                <span id="evidence-label">证据列表</span>
+                <strong id="evidence-count">0</strong>
+              </div>
+              <p id="evidence-caption">按综合排名展示</p>
+            </div>
+            <div id="evidence-list" class="evidence-list"></div>
+          </div>
+        </section>
+      </section>
+
+      <section class="evidence-legend" aria-labelledby="legend-title">
+        <div>
+          <p class="panel-kicker">EVIDENCE ROLES</p>
+          <h2 id="legend-title">不同来源，承担不同证明责任</h2>
+        </div>
+        <div class="legend-grid">
+          <article>
+            <span class="role-dot role-current"></span>
+            <strong>当前实现</strong>
+            <p>必须经过实时源码核验，证明当前工作区中的实际实现。</p>
+          </article>
+          <article>
+            <span class="role-dot role-design"></span>
+            <strong>内部设计</strong>
+            <p>说明架构意图与权衡，不能单独证明代码已经实现。</p>
+          </article>
+          <article>
+            <span class="role-dot role-history"></span>
+            <strong>历史记录</strong>
+            <p>说明演进过程，不代表当前版本仍保持相同行为。</p>
+          </article>
+          <article>
+            <span class="role-dot role-official"></span>
+            <strong>官方规范</strong>
+            <p>说明标准要求，不能反向证明 Mini-Nanobot 已经符合。</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Engineering Knowledge RAG</span>
+      <span>Internal knowledge · Official specifications · Live verification</span>
+    </footer>
+  </body>
+</html>

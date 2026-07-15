@@ -1,0 +1,45 @@
+{
+  "datasets": [
+    {
+      "dataset_roles": [
+        "development_regression"
+      ],
+      "label_versions": [
+        "engineering-eval/v2"
+      ],
+      "name": "mini_nanobot_internal.jsonl",
+      "question_count": 60,
+      "sha256": "d6e2cf0477a79ba695398ef6e81e3931546487c7380e3fcbd8b6d469eb288869"
+    },
+    {
+      "dataset_roles": [
+        "development_regression"
+      ],
+      "label_versions": [
+        "engineering-eval/v2"
+      ],
+      "name": "official_engineering_specs.jsonl",
+      "question_count": 20,
+      "sha256": "483a075194ffcdd873a2eaaa828d6f188bdcf9322b5398b8ece619240d9f7952"
+    },
+    {
+      "dataset_roles": [
+        "holdout"
+      ],
+      "label_versions": [
+        "engineering-eval/v2"
+      ],
+      "name": "engineering_holdout_v2.jsonl",
+      "question_count": 30,
+      "sha256": "518214aa4e8fb942a6f8780f5627fd9452a97d7f6d503e49c482b9abde4bb52e"
+    }
+  ],
+  "manifest_build_id": "build_4ae47172a9869d88ce0f",
+  "mini_nanobot": {
+    "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+    "content_hash": "1344e6e2374825773b67b40b01d6dd1436e4ec08adf5f02a8b8a023e96fc115f",
+    "dirty": true,
+    "source_id": "mini_nanobot"
+  },
+  "schema_version": "engineering-eval-snapshot/v1"
+}

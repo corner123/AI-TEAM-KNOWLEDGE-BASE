@@ -26,6 +26,7 @@ class QueryRouter:
         self.strategies = strategies
         self.llm = llm
         self._default_strategy = "HybridSearch"
+        self.last_strategy_name = self._default_strategy
 
     def route(self, query: str) -> RetrievalStrategy:
         strategy_name = self._rule_based_route(query)
@@ -36,7 +37,8 @@ class QueryRouter:
         if strategy is None:
             strategy = self.strategies.get(self._default_strategy)
 
-        logger.info(f"Routed to: {strategy.get_strategy_name()}")
+        self.last_strategy_name = strategy.get_strategy_name()
+        logger.info(f"Routed to: {self.last_strategy_name}")
         return strategy
 
     def route_and_retrieve(self, query: str, top_k: int = 5, **kwargs) -> List[Document]:
@@ -48,6 +50,7 @@ class QueryRouter:
             fallback = self.strategies.get(self._default_strategy)
             if fallback:
                 results = fallback.retrieve(query, top_k=top_k, **kwargs)
+                self.last_strategy_name = fallback.get_strategy_name()
 
         return results
 

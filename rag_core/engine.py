@@ -1,7 +1,6 @@
 from typing import Dict, Any, List, Optional
 from config import RAGConfig
 from rag_core.index.embeddings import EmbeddingManager
-from rag_core.index.vector_store import MilvusVectorStore
 from rag_core.retrieval import (
     HybridSearchStrategy, Text2SQLStrategy, QueryRewriteStrategy,
     MetadataFilterStrategy, MultimodalSearchStrategy, RerankerStrategy,
@@ -15,6 +14,19 @@ from utils.helpers import Timer
 logger = get_logger("engine")
 
 
+def _try_connect_milvus(config):
+    """Try to connect to Milvus. Returns MilvusVectorStore or None."""
+    try:
+        from pymilvus import connections
+        from rag_core.index.vector_store import MilvusVectorStore
+        connections.connect(alias="default", host=config.host, port=config.port)
+        logger.info(f"Connected to Milvus at {config.host}:{config.port}")
+        return MilvusVectorStore
+    except Exception as e:
+        logger.warning(f"Milvus not available ({e}), using local FAISS store")
+        return None
+
+
 class RAGEngine:
     def __init__(self, config: RAGConfig = None):
         if config is None:
@@ -23,7 +35,7 @@ class RAGEngine:
         self._initialized = False
 
         self.embedding_manager: Optional[EmbeddingManager] = None
-        self.vector_store: Optional[MilvusVectorStore] = None
+        self.vector_store = None
         self.query_router: Optional[QueryRouter] = None
         self.generator = None
         self.evaluator: Optional[RAGASEvaluator] = None
@@ -35,7 +47,14 @@ class RAGEngine:
         logger.info("Initializing RAG Engine...")
 
         self.embedding_manager = EmbeddingManager(self.config.embedding)
-        self.vector_store = MilvusVectorStore(self.config.milvus, self.embedding_manager)
+
+        # Try Milvus first, fall back to local FAISS
+        MilvusVectorStore = _try_connect_milvus(self.config.milvus)
+        if MilvusVectorStore:
+            self.vector_store = MilvusVectorStore(self.config.milvus, self.embedding_manager)
+        else:
+            from rag_core.index.local_vector_store import LocalVectorStore
+            self.vector_store = LocalVectorStore(self.embedding_manager)
 
         from langchain_deepseek import ChatDeepSeek
         llm = ChatDeepSeek(
@@ -67,12 +86,17 @@ class RAGEngine:
 
         with Timer("query") as t:
             if strategy and strategy in self.query_router.strategies:
-                docs = self.query_router.strategies[strategy].retrieve(question, top_k=top_k)
+                selected = self.query_router.strategies[strategy]
+                docs = selected.retrieve(question, top_k=top_k)
+                strategy_used = selected.get_strategy_name()
             else:
                 docs = self.query_router.route_and_retrieve(question, top_k=top_k)
+                strategy_used = self.query_router.last_strategy_name
 
             result = self.generator.generate(question, docs)
-            result["latency"] = t.elapsed
+
+        result["latency"] = t.elapsed
+        result["strategy_used"] = strategy_used
 
         return result
 

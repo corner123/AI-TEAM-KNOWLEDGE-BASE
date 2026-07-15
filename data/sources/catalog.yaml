@@ -1,0 +1,116 @@
+schema_version: "1.0"
+
+# The two repositories remain independent. This catalog only reads the
+# Mini-Nanobot worktree identified by MINI_NANOBOT_REPO.
+sources:
+  - id: mini_nanobot
+    type: git_repository
+    path: "${MINI_NANOBOT_REPO}"
+    license: "local-project"
+    python_symbol_cards: true
+    git_history_limit: 50
+    include:
+      - "README.md"
+      - "docs/*.md"
+      - "docs/**/*.md"
+      - "pyproject.toml"
+      - "mini_nanobot/*.py"
+      - "mini_nanobot/**/*.py"
+      - "tests/*.py"
+      - "tests/**/*.py"
+      - "benchmarks/*.json"
+      - "docker/Dockerfile*"
+    exclude:
+      - ".git/**"
+      - ".nanobot/**"
+      - ".pytest_cache/**"
+      - "**/__pycache__/**"
+      - "**/*.pyc"
+      - "**/*.sqlite3"
+      - "**/*.log"
+      - "**/.env*"
+      - "**/*secret*"
+      - "**/*credential*"
+      - "readme-mine.md"
+    metadata:
+      corpus: "internal"
+      authority: "project"
+
+  - id: mcp_specification
+    type: official_web
+    version: "2025-06-18"
+    license: "see-source-terms"
+    allowed_domains:
+      - "modelcontextprotocol.io"
+    urls:
+      - "https://modelcontextprotocol.io/specification/2025-06-18/index"
+      - "https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle"
+      - "https://modelcontextprotocol.io/specification/2025-06-18/server/index"
+      - "https://modelcontextprotocol.io/specification/2025-06-18/server/tools"
+    metadata:
+      corpus: "official"
+      authority: "official"
+      scope_aliases: ["MCP", "Model Context Protocol"]
+      covered_topics: ["overview", "概述", "lifecycle", "生命周期", "initialize", "initialized", "初始化", "shutdown", "stdio", "HTTP", "protocol version", "协议版本", "server", "服务器", "tools", "工具", "tools/list", "tools/call", "listChanged", "notifications/tools/list_changed", "inputSchema", "structuredContent", "isError"]
+
+  - id: langgraph_persistence
+    type: official_web
+    version: "catalog-2026-07"
+    license: "see-source-terms"
+    allowed_domains:
+      - "docs.langchain.com"
+    urls:
+      - "https://docs.langchain.com/oss/python/langgraph/persistence"
+    metadata:
+      corpus: "official"
+      authority: "official"
+      scope_aliases: ["LangGraph", "StateSnapshot"]
+      covered_topics: ["persistence", "checkpoint", "checkpointer", "store", "thread", "thread_id", "super-step", "StateSnapshot", "history", "历史", "replay", "重放", "time travel", "fork", "分叉"]
+
+  - id: json_schema_2020_12
+    type: official_web
+    version: "2020-12"
+    license: "see-source-terms"
+    allowed_domains:
+      - "json-schema.org"
+    urls:
+      - "https://json-schema.org/draft/2020-12"
+      - "https://json-schema.org/draft/2020-12/json-schema-core"
+    metadata:
+      corpus: "official"
+      authority: "official"
+      scope_aliases: ["JSON Schema", "Draft 2020-12"]
+      covered_topics: ["$schema", "$id", "$defs", "$ref", "$dynamicRef", "$dynamicAnchor", "$recursiveRef", "$recursiveAnchor", "dynamic scope", "vocabulary", "meta-schema", "schema resource", "URI", "方言", "词汇表"]
+
+  - id: python_312_runtime
+    type: official_web
+    version: "3.12"
+    license: "PSF-2.0"
+    allowed_domains:
+      - "docs.python.org"
+    urls:
+      - "https://docs.python.org/3.12/library/asyncio.html"
+      - "https://docs.python.org/3.12/library/asyncio-runner.html"
+      - "https://docs.python.org/3.12/library/pathlib.html"
+      - "https://docs.python.org/3.12/library/sqlite3.html"
+      - "https://docs.python.org/3.12/library/subprocess.html"
+    metadata:
+      corpus: "official"
+      authority: "official"
+      scope_aliases: ["Python 3.12", "asyncio", "pathlib", "sqlite3", "subprocess"]
+      covered_topics: ["asyncio", "asyncio.run", "Runner", "pathlib", "Path.resolve", "Path.relative_to", "sqlite3", "subprocess", "subprocess.run", "Popen", "shell=True", "shell=False"]
+
+  - id: docker_security
+    type: official_web
+    version: "catalog-2026-07"
+    license: "see-source-terms"
+    allowed_domains:
+      - "docs.docker.com"
+    urls:
+      - "https://docs.docker.com/engine/security/"
+      - "https://docs.docker.com/engine/containers/resource_constraints/"
+    metadata:
+      corpus: "official"
+      authority: "official"
+      scope_aliases: ["Docker", "container", "容器"]
+      covered_topics: ["security", "安全", "resource constraints", "资源约束", "memory", "内存", "--memory", "--memory-reservation", "soft limit", "hard limit", "swap", "CPU", "--cpus", "--cpu-period", "--cpu-quota", "namespace", "cgroup", "capabilities"]

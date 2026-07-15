@@ -3,14 +3,17 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()
+# A process manager or deployment environment must take precedence over the
+# developer-only .env file.  In particular, never let a repository file
+# replace API tokens or repository roots supplied by the service runtime.
+load_dotenv(override=False)
 
 
 @dataclass
 class LLMConfig:
     api_key: str = field(default_factory=lambda: os.getenv("DEEPSEEK_API_KEY", ""))
     base_url: str = field(default_factory=lambda: os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com"))
-    model: str = field(default_factory=lambda: os.getenv("DEEPSEEK_MODEL", "deepseek-chat"))
+    model: str = field(default_factory=lambda: os.getenv("DEEPSEEK_MODEL", "deepseek-v4-flash"))
     temperature: float = 0.1
     max_tokens: int = 2048
 

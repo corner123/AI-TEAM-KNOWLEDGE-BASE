@@ -1,0 +1,32 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Engineering RAG: 本地 Web 演示",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/app.py",
+      "console": "internalConsole",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": true,
+      "envFile": "${workspaceFolder}/.env",
+      "env": {
+        "PYTHONNOUSERSITE": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONIOENCODING": "utf-8",
+        "ENGINEERING_INDEX_DIR": "data/indexes/engineering",
+        "ENGINEERING_MANIFEST_PATH": "data/manifests/builds/current.json",
+        "RAG_UI_PORT": "8001",
+        "RAG_API_TOKEN": "${input:ragApiToken}"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "ragApiToken",
+      "type": "promptString",
+      "description": "本次本地演示使用的 RAG API Token",
+      "password": true
+    }
+  ]
+}

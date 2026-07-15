@@ -1,0 +1,1684 @@
+{
+  "schema_version": "engineering-eval/v2",
+  "generated_at": "2026-07-14T18:09:25.022639+00:00",
+  "dataset": "engineering_holdout_v2.jsonl",
+  "question_count": 30,
+  "top_k": 5,
+  "baseline": "hybrid_live",
+  "suite": "e2e",
+  "run_metadata": {
+    "factory": "rag_core.evaluation.engineering_adapter:create_default_e2e_predictors",
+    "dataset_files": [
+      {
+        "name": "engineering_holdout_v2.jsonl",
+        "sha256": "518214aa4e8fb942a6f8780f5627fd9452a97d7f6d503e49c482b9abde4bb52e"
+      }
+    ],
+    "dataset_roles": [
+      "holdout"
+    ],
+    "label_versions": [
+      "engineering-eval/v2"
+    ],
+    "evaluation_snapshot": {
+      "datasets": [
+        {
+          "dataset_roles": [
+            "development_regression"
+          ],
+          "label_versions": [
+            "engineering-eval/v2"
+          ],
+          "name": "mini_nanobot_internal.jsonl",
+          "question_count": 60,
+          "sha256": "d6e2cf0477a79ba695398ef6e81e3931546487c7380e3fcbd8b6d469eb288869"
+        },
+        {
+          "dataset_roles": [
+            "development_regression"
+          ],
+          "label_versions": [
+            "engineering-eval/v2"
+          ],
+          "name": "official_engineering_specs.jsonl",
+          "question_count": 20,
+          "sha256": "483a075194ffcdd873a2eaaa828d6f188bdcf9322b5398b8ece619240d9f7952"
+        },
+        {
+          "dataset_roles": [
+            "holdout"
+          ],
+          "label_versions": [
+            "engineering-eval/v2"
+          ],
+          "name": "engineering_holdout_v2.jsonl",
+          "question_count": 30,
+          "sha256": "518214aa4e8fb942a6f8780f5627fd9452a97d7f6d503e49c482b9abde4bb52e"
+        }
+      ],
+      "manifest_build_id": "build_4ae47172a9869d88ce0f",
+      "mini_nanobot": {
+        "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+        "content_hash": "1344e6e2374825773b67b40b01d6dd1436e4ec08adf5f02a8b8a023e96fc115f",
+        "dirty": true,
+        "source_id": "mini_nanobot"
+      },
+      "schema_version": "engineering-eval-snapshot/v1",
+      "snapshot_path": "evaluation_snapshot.json",
+      "snapshot_sha256": "c1614fe1324f284d12a25ff9afa427b4e2e9cedca4493285351f3013a6b232b3"
+    },
+    "latency_scope": "warm_requests"
+  },
+  "strategy_metadata": {
+    "hybrid_live": {
+      "build_id": "build_4ae47172a9869d88ce0f",
+      "embedding_model": "BAAI/bge-small-zh-v1.5",
+      "document_count": 962,
+      "partitions": [
+        {
+          "corpus": "internal",
+          "authority": "code",
+          "directory": "internal__code",
+          "document_count": 485,
+          "weight": 1.35,
+          "file_sha256": {
+            "documents.json": "6c548940274b1797f5a636bac32104e7a067a92eb15b779ad7d7cb8fd8822a7f",
+            "index.faiss": "b2a066d603bf6bd58ae6c32ab85fda45ff73f4ac5e021af475a83672d638ce91",
+            "index_meta.json": "f9f89dd50c529cbeb192c8d6870c76880a2b16b4d36457ad3d575103485a2deb"
+          }
+        },
+        {
+          "corpus": "internal",
+          "authority": "design",
+          "directory": "internal__design",
+          "document_count": 35,
+          "weight": 1.0,
+          "file_sha256": {
+            "documents.json": "7855e4844cc6a91d2ef709fd356f52894d2bd26ce40c24e54c73b93202bc7362",
+            "index.faiss": "d4bc0ede22eea5f3c33899bdb550d9528532c826199d364336f9725d1c512dc7",
+            "index_meta.json": "5bad6bdad06b7d5533a6e5a107d27fc80c10851e52baaa8a55bfdacd3fe94b5b"
+          }
+        },
+        {
+          "corpus": "internal",
+          "authority": "history",
+          "directory": "internal__history",
+          "document_count": 10,
+          "weight": 0.8,
+          "file_sha256": {
+            "documents.json": "2c2059d6b0f4e7d05a35fb64ec689f4a0fbca0686ef8e50157ada0b940e879d4",
+            "index.faiss": "e7a7c35f7280bc4806ac92760ebcf178b1b313c48daa51972414619ac167680d",
+            "index_meta.json": "af5e57af3dd99e4b12241aaa1bda2a0120c7d0f972a7a9af08e9b21bce4b13d6"
+          }
+        },
+        {
+          "corpus": "internal",
+          "authority": "test",
+          "directory": "internal__test",
+          "document_count": 59,
+          "weight": 1.2,
+          "file_sha256": {
+            "documents.json": "3e050c12eb5360bac519354f1c1fe499636154449ae08e752ff04d62f876ef09",
+            "index.faiss": "a94529cb8e87f7af8fd8d8d18ec6a927dd6c4283c7179ca911943660e46a0883",
+            "index_meta.json": "23e74faa78a405da3562d4ad65969d4768d404d9952e7d4f742874d0c95243a4"
+          }
+        },
+        {
+          "corpus": "official",
+          "authority": "official",
+          "directory": "official__official",
+          "document_count": 373,
+          "weight": 0.9,
+          "file_sha256": {
+            "documents.json": "cc61d0965bb475eb558aac9128be5671d61da4e9db88a541d2eefe8001ede6b7",
+            "index.faiss": "729a34f408225ded426f872cce4b1c14bd43b681b6430a6912cebc0a7b79b375",
+            "index_meta.json": "fa2ca2ab836677c649ea70c7e38f92930235b5f6a673e9ad3fc384226276627c"
+          }
+        }
+      ],
+      "retrieval_strategy": "hybrid",
+      "oracle_route": false,
+      "live_verification": true,
+      "answer_generation": true,
+      "reranker": false,
+      "candidate_budget_multiplier": 3,
+      "partition_candidate_multiplier": 3,
+      "federated_candidate_multiplier": 3,
+      "fail_closed": true
+    }
+  },
+  "strategies": {
+    "hybrid_live": {
+      "strategy": "hybrid_live",
+      "top_k": 5,
+      "metrics": {
+        "routing_accuracy": 0.7,
+        "routing_macro_f1": 0.6263099219620958,
+        "file_recall_at_k": 0.7753623188405797,
+        "primary_recall_at_k": 0.7753623188405797,
+        "hit_rate_at_k": 0.8695652173913043,
+        "primary_hit_at_k": 0.8695652173913043,
+        "supporting_recall_at_k": 0.375,
+        "ndcg_at_k": 0.712120284461187,
+        "citation_precision_at_k": 0.3406666666666667,
+        "symbol_recall_at_k": 0.3205128205128205,
+        "live_primary_hit_at_k": 0.7857142857142857,
+        "mrr": 0.758695652173913,
+        "unanswerable_refusal_rate": 1.0,
+        "answerable_refusal_rate": 0.34782608695652173,
+        "refusal_precision": 0.4666666666666667,
+        "refusal_recall": 1.0,
+        "refusal_f1": 0.6363636363636364,
+        "refusal_reason_accuracy": 1.0,
+        "strict_refusal_reason_recall": 1.0,
+        "mean_latency_ms": 594.3543266699029,
+        "p50_latency_ms": 178.5424999834504,
+        "p95_latency_ms": 1425.2558100153692,
+        "question_count": 30,
+        "routing_eligible_questions": 30,
+        "file_eligible_questions": 23,
+        "symbol_eligible_questions": 13,
+        "unanswerable_questions": 7
+      },
+      "details": [
+        {
+          "id": "H2-INT-001",
+          "category": "internal_implementation",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 1.0,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.6666666666666666,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 0.3333333333333333,
+          "expected_sources": [
+            "mini_nanobot/tools/executor.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/tools/executor.py"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/hooks/manager.py"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/tools/executor.py",
+            "mini_nanobot/hooks/manager.py",
+            "docs/architecture/knowledge-search-integration.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/tools/executor.py"
+          ],
+          "matched_supporting_sources": [
+            "mini_nanobot/hooks/manager.py"
+          ],
+          "expected_symbols": [
+            "StreamingToolExecutor.execute_one",
+            "HookManager.check",
+            "HookManager.emit"
+          ],
+          "retrieved_symbols": [
+            "StreamingToolExecutor.execute_one"
+          ],
+          "matched_symbols": [
+            "StreamingToolExecutor.execute_one"
+          ],
+          "refused": true,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": "unsupported_anchor",
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 1550.9454000275582
+        },
+        {
+          "id": "H2-INT-002",
+          "category": "internal_implementation",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.2,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 0.3333333333333333,
+          "expected_sources": [
+            "mini_nanobot/core/prompts.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/core/prompts.py"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "mini_nanobot/core/prompts.py",
+            "mini_nanobot/core/prompts.py#symbol:SystemPromptBuilder.clear_cache",
+            "mini_nanobot/core/prompts.py#symbol:SystemPromptBuilder",
+            "mini_nanobot/core/query_engine.py#symbol:QueryEngine",
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/core/prompts.py"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [
+            "SystemPromptBuilder.clear_cache",
+            "SystemPromptBuilder.build",
+            "SystemPromptBuilder.dangerous_uncached_section"
+          ],
+          "retrieved_symbols": [
+            "SystemPromptBuilder.clear_cache",
+            "SystemPromptBuilder.clear_cache",
+            "clear_cache",
+            "SystemPromptBuilder",
+            "QueryEngine"
+          ],
+          "matched_symbols": [
+            "SystemPromptBuilder.clear_cache"
+          ],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 862.4140999745578
+        },
+        {
+          "id": "H2-INT-003",
+          "category": "internal_implementation",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.25,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 1.0,
+          "expected_sources": [
+            "mini_nanobot/memory/checkpoint.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/memory/checkpoint.py"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "mini_nanobot/memory/checkpoint.py",
+            "tests/test_checkpoint_context.py",
+            "mini_nanobot/core/subagent.py",
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/memory/checkpoint.py"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [
+            "SQLiteCheckpointStore.list_sessions"
+          ],
+          "retrieved_symbols": [
+            "SQLiteCheckpointStore.list_sessions"
+          ],
+          "matched_symbols": [
+            "SQLiteCheckpointStore.list_sessions"
+          ],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 1157.628700020723
+        },
+        {
+          "id": "H2-INT-004",
+          "category": "internal_implementation",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 0.6309297535714574,
+          "citation_precision_at_k": 0.2,
+          "reciprocal_rank": 0.5,
+          "symbol_recall_at_k": 0.5,
+          "expected_sources": [
+            "mini_nanobot/tools/git.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/tools/git.py"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "mini_nanobot/core/subagent.py",
+            "mini_nanobot/tools/git.py",
+            "mini_nanobot/tools/git.py#symbol:GitDiffTool",
+            "mini_nanobot/tools/git.py#symbol:GitDiffTool.run",
+            "docs/README.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/tools/git.py"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [
+            "GitDiffTool.run",
+            "_GitTool._git"
+          ],
+          "retrieved_symbols": [
+            "GitDiffTool",
+            "GitDiffTool.run",
+            "run"
+          ],
+          "matched_symbols": [
+            "GitDiffTool.run"
+          ],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 1159.4103999668732
+        },
+        {
+          "id": "H2-INT-005",
+          "category": "internal_implementation",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.25,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 0.5,
+          "expected_sources": [
+            "mini_nanobot/memory/long_term.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/memory/long_term.py"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "mini_nanobot/memory/long_term.py",
+            "mini_nanobot/cli.py",
+            "mini_nanobot/memory/checkpoint.py",
+            "docs/architecture/context-memory-checkpoint.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/memory/long_term.py"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [
+            "LongTermMemoryStore.recall_attachment",
+            "LongTermMemoryStore._freshness_warning"
+          ],
+          "retrieved_symbols": [
+            "LongTermMemoryStore.recall_attachment"
+          ],
+          "matched_symbols": [
+            "LongTermMemoryStore.recall_attachment"
+          ],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 1409.9705000407994
+        },
+        {
+          "id": "H2-INT-006",
+          "category": "internal_implementation",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.3333333333333333,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 0.0,
+          "expected_sources": [
+            "mini_nanobot/sandbox/executor.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/sandbox/executor.py"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "mini_nanobot/sandbox/executor.py",
+            "mini_nanobot/tools/shell.py",
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/sandbox/executor.py"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [
+            "ShellSandboxExecutor.run",
+            "ShellSandboxExecutor._cap"
+          ],
+          "retrieved_symbols": [
+            "ShellSandboxExecutor"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 1421.052600024268
+        },
+        {
+          "id": "H2-INT-007",
+          "category": "internal_implementation",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.25,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 0.0,
+          "expected_sources": [
+            "mini_nanobot/skills/loader.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/skills/loader.py"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "mini_nanobot/skills/loader.py",
+            "tests/test_memory_skills.py",
+            "mini_nanobot/core/query_engine.py",
+            "docs/architecture/overview.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/skills/loader.py"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [
+            "SkillManager._parse_skill",
+            "SkillManager.invoked_attachment"
+          ],
+          "retrieved_symbols": [
+            "SkillManager"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 1407.8601999790408
+        },
+        {
+          "id": "H2-INT-008",
+          "category": "internal_implementation",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "official",
+          "routing_correct": false,
+          "file_recall_at_k": 0.0,
+          "primary_recall_at_k": 0.0,
+          "hit_rate_at_k": false,
+          "primary_hit_at_k": false,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 0.0,
+          "citation_precision_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "symbol_recall_at_k": 0.0,
+          "expected_sources": [
+            "mini_nanobot/tools/base.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/tools/base.py"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/server/tools",
+            "https://docs.python.org/3.12/library/subprocess.html",
+            "https://json-schema.org/draft/2020-12"
+          ],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [
+            "Tool.validate_input",
+            "Tool.to_model_schema"
+          ],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": "topic_not_indexed",
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": false,
+          "latency_ms": 41.84910003095865
+        },
+        {
+          "id": "H2-INT-009",
+          "category": "internal_implementation",
+          "answerable": true,
+          "expected_route": "implementation",
+          "predicted_route": "implementation",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.3333333333333333,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 1.0,
+          "expected_sources": [
+            "mini_nanobot/core/state.py"
+          ],
+          "primary_sources": [
+            "mini_nanobot/core/state.py"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "mini_nanobot/core/state.py",
+            "mini_nanobot/core/state.py#symbol:AgentState.remember_file",
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/core/state.py"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [
+            "AgentState.remember_file"
+          ],
+          "retrieved_symbols": [
+            "AgentState.remember_file",
+            "AgentState.remember_file",
+            "remember_file"
+          ],
+          "matched_symbols": [
+            "AgentState.remember_file"
+          ],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 1260.2989000151865
+        },
+        {
+          "id": "H2-OFF-001",
+          "category": "official_protocol",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.3333333333333333,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle"
+          ],
+          "primary_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle",
+            "https://modelcontextprotocol.io/specification/2025-06-18/index",
+            "https://json-schema.org/draft/2020-12/json-schema-core"
+          ],
+          "matched_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 42.40189999109134
+        },
+        {
+          "id": "H2-OFF-002",
+          "category": "official_protocol",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "implementation",
+          "routing_correct": false,
+          "file_recall_at_k": 0.0,
+          "primary_recall_at_k": 0.0,
+          "hit_rate_at_k": false,
+          "primary_hit_at_k": false,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 0.0,
+          "citation_precision_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/server/tools"
+          ],
+          "primary_sources": [
+            "https://modelcontextprotocol.io/specification/2025-06-18/server/tools"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "mini_nanobot/tools/registry.py#symbol:ToolRegistry.list",
+            "mini_nanobot/core/subagent.py#symbol:SubAgentRunner",
+            "mini_nanobot/core/subagent.py",
+            "mini_nanobot/tools/registry.py",
+            "docs/architecture/knowledge-search-integration.md"
+          ],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "ToolRegistry.list",
+            "list",
+            "SubAgentRunner"
+          ],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": "missing_current_implementation_evidence",
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": null,
+          "latency_ms": 656.6009999951348
+        },
+        {
+          "id": "H2-OFF-003",
+          "category": "official_persistence",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.5,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://docs.langchain.com/oss/python/langgraph/persistence"
+          ],
+          "primary_sources": [
+            "https://docs.langchain.com/oss/python/langgraph/persistence"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://docs.langchain.com/oss/python/langgraph/persistence",
+            "https://docs.python.org/3.12/library/sqlite3.html"
+          ],
+          "matched_sources": [
+            "https://docs.langchain.com/oss/python/langgraph/persistence"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 35.255700000561774
+        },
+        {
+          "id": "H2-OFF-004",
+          "category": "official_schema",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.5,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://json-schema.org/draft/2020-12/json-schema-core"
+          ],
+          "primary_sources": [
+            "https://json-schema.org/draft/2020-12/json-schema-core"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://json-schema.org/draft/2020-12/json-schema-core",
+            "https://json-schema.org/draft/2020-12"
+          ],
+          "matched_sources": [
+            "https://json-schema.org/draft/2020-12/json-schema-core"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 45.69830000400543
+        },
+        {
+          "id": "H2-OFF-005",
+          "category": "official_python_runtime",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 0.5,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://docs.python.org/3.12/library/asyncio-runner.html"
+          ],
+          "primary_sources": [
+            "https://docs.python.org/3.12/library/asyncio-runner.html"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://docs.python.org/3.12/library/asyncio-runner.html",
+            "https://docs.python.org/3.12/library/asyncio.html"
+          ],
+          "matched_sources": [
+            "https://docs.python.org/3.12/library/asyncio-runner.html"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 47.408899990841746
+        },
+        {
+          "id": "H2-OFF-006",
+          "category": "official_container_security",
+          "answerable": true,
+          "expected_route": "official",
+          "predicted_route": "official",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 1.0,
+          "citation_precision_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "https://docs.docker.com/engine/containers/resource_constraints/"
+          ],
+          "primary_sources": [
+            "https://docs.docker.com/engine/containers/resource_constraints/"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "https://docs.docker.com/engine/containers/resource_constraints/"
+          ],
+          "matched_sources": [
+            "https://docs.docker.com/engine/containers/resource_constraints/"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 64.37229999573901
+        },
+        {
+          "id": "H2-CMP-001",
+          "category": "cross_corpus_comparison",
+          "answerable": true,
+          "expected_route": "comparison",
+          "predicted_route": "design",
+          "routing_correct": false,
+          "file_recall_at_k": 0.0,
+          "primary_recall_at_k": 0.0,
+          "hit_rate_at_k": false,
+          "primary_hit_at_k": false,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "citation_precision_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "symbol_recall_at_k": 0.0,
+          "expected_sources": [
+            "mini_nanobot/tools/mcp_adapter.py",
+            "https://modelcontextprotocol.io/specification/2025-06-18/server/tools",
+            "https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle"
+          ],
+          "primary_sources": [
+            "mini_nanobot/tools/mcp_adapter.py",
+            "https://modelcontextprotocol.io/specification/2025-06-18/server/tools",
+            "https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle"
+          ],
+          "supporting_sources": [
+            "docs/architecture/execution-and-tools.md"
+          ],
+          "retrieved_sources": [
+            "docs/architecture/overview.md",
+            "docs/README.md",
+            "pyproject.toml",
+            "docs/adr/0001-handwritten-react-loop.md",
+            "mini_nanobot/tools/mcp_adapter.py#symbol:MCPToolAdapter.is_read_only"
+          ],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [
+            "MCPToolAdapter.run"
+          ],
+          "retrieved_symbols": [
+            "MCPToolAdapter.is_read_only",
+            "is_read_only"
+          ],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": "unsupported_anchor",
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": false,
+          "latency_ms": 204.9795999773778
+        },
+        {
+          "id": "H2-CMP-002",
+          "category": "cross_corpus_comparison",
+          "answerable": true,
+          "expected_route": "comparison",
+          "predicted_route": "implementation",
+          "routing_correct": false,
+          "file_recall_at_k": 0.5,
+          "primary_recall_at_k": 0.5,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 1.0,
+          "ndcg_at_k": 0.6280335914305488,
+          "citation_precision_at_k": 0.4,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 0.0,
+          "expected_sources": [
+            "mini_nanobot/memory/checkpoint.py",
+            "https://docs.langchain.com/oss/python/langgraph/persistence"
+          ],
+          "primary_sources": [
+            "mini_nanobot/memory/checkpoint.py",
+            "https://docs.langchain.com/oss/python/langgraph/persistence"
+          ],
+          "supporting_sources": [
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/memory/checkpoint.py",
+            "benchmarks/tasks.json",
+            "pyproject.toml",
+            "mini_nanobot/cli.py",
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/memory/checkpoint.py"
+          ],
+          "matched_supporting_sources": [
+            "docs/adr/0002-sqlite-snapshot-checkpoint.md"
+          ],
+          "expected_symbols": [
+            "SQLiteCheckpointStore.save",
+            "SQLiteCheckpointStore.load"
+          ],
+          "retrieved_symbols": [
+            "SQLiteCheckpointStore"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 1350.9924999671057
+        },
+        {
+          "id": "H2-CMP-003",
+          "category": "cross_corpus_comparison",
+          "answerable": true,
+          "expected_route": "comparison",
+          "predicted_route": "implementation",
+          "routing_correct": false,
+          "file_recall_at_k": 0.5,
+          "primary_recall_at_k": 0.5,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": 0.6131471927654584,
+          "citation_precision_at_k": 0.2,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 0.5,
+          "expected_sources": [
+            "mini_nanobot/tools/base.py",
+            "https://json-schema.org/draft/2020-12/json-schema-core"
+          ],
+          "primary_sources": [
+            "mini_nanobot/tools/base.py",
+            "https://json-schema.org/draft/2020-12/json-schema-core"
+          ],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "mini_nanobot/tools/base.py",
+            "mini_nanobot/tools/knowledge.py",
+            "pyproject.toml",
+            "benchmarks/tasks.json",
+            "docs/architecture/knowledge-search-integration.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/tools/base.py"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [
+            "Tool.to_model_schema",
+            "Tool.validate_input"
+          ],
+          "retrieved_symbols": [
+            "Tool.validate_input",
+            "KnowledgeSearchTool.validate_input"
+          ],
+          "matched_symbols": [
+            "Tool.validate_input"
+          ],
+          "refused": true,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": "unsupported_anchor",
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 1428.6948000080884
+        },
+        {
+          "id": "H2-CMP-004",
+          "category": "cross_corpus_comparison",
+          "answerable": true,
+          "expected_route": "comparison",
+          "predicted_route": "implementation",
+          "routing_correct": false,
+          "file_recall_at_k": 0.5,
+          "primary_recall_at_k": 0.5,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.5,
+          "ndcg_at_k": 0.5815871360157758,
+          "citation_precision_at_k": 0.4,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": 0.0,
+          "expected_sources": [
+            "mini_nanobot/sandbox/executor.py",
+            "https://docs.python.org/3.12/library/subprocess.html"
+          ],
+          "primary_sources": [
+            "mini_nanobot/sandbox/executor.py",
+            "https://docs.python.org/3.12/library/subprocess.html"
+          ],
+          "supporting_sources": [
+            "mini_nanobot/sandbox/policy.py",
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/sandbox/executor.py",
+            "pyproject.toml",
+            "benchmarks/tasks.json",
+            "mini_nanobot/cli.py",
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "matched_sources": [
+            "mini_nanobot/sandbox/executor.py"
+          ],
+          "matched_supporting_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "expected_symbols": [
+            "ShellSandboxExecutor.run",
+            "CommandSafetyPolicy.inspect"
+          ],
+          "retrieved_symbols": [
+            "ShellSandboxExecutor"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": true,
+          "latency_ms": 1404.701700026635
+        },
+        {
+          "id": "H2-CMP-005",
+          "category": "cross_corpus_comparison",
+          "answerable": true,
+          "expected_route": "comparison",
+          "predicted_route": "official",
+          "routing_correct": false,
+          "file_recall_at_k": 0.3333333333333333,
+          "primary_recall_at_k": 0.3333333333333333,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.4396592698888862,
+          "citation_precision_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docker/Dockerfile.sandbox",
+            "https://docs.docker.com/engine/security/",
+            "https://docs.docker.com/engine/containers/resource_constraints/"
+          ],
+          "primary_sources": [
+            "docker/Dockerfile.sandbox",
+            "https://docs.docker.com/engine/security/",
+            "https://docs.docker.com/engine/containers/resource_constraints/"
+          ],
+          "supporting_sources": [
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "retrieved_sources": [
+            "https://docs.docker.com/engine/security/"
+          ],
+          "matched_sources": [
+            "https://docs.docker.com/engine/security/"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": "source_not_catalogued",
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": false,
+          "latency_ms": 41.94249998545274
+        },
+        {
+          "id": "H2-NEG-001",
+          "category": "negative_dynamic_external",
+          "answerable": false,
+          "expected_route": "out_of_scope",
+          "predicted_route": "out_of_scope",
+          "routing_correct": true,
+          "file_recall_at_k": null,
+          "primary_recall_at_k": null,
+          "hit_rate_at_k": null,
+          "primary_hit_at_k": null,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": null,
+          "citation_precision_at_k": null,
+          "reciprocal_rank": null,
+          "symbol_recall_at_k": null,
+          "expected_sources": [],
+          "primary_sources": [],
+          "supporting_sources": [],
+          "retrieved_sources": [],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": "dynamic_external_state_not_indexed",
+          "predicted_refusal_reason": "dynamic_external_state_not_indexed",
+          "refusal_reason_correct": true,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 0.06689998554065824
+        },
+        {
+          "id": "H2-NEG-002",
+          "category": "negative_private_secret",
+          "answerable": false,
+          "expected_route": "out_of_scope",
+          "predicted_route": "out_of_scope",
+          "routing_correct": true,
+          "file_recall_at_k": null,
+          "primary_recall_at_k": null,
+          "hit_rate_at_k": null,
+          "primary_hit_at_k": null,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": null,
+          "citation_precision_at_k": null,
+          "reciprocal_rank": null,
+          "symbol_recall_at_k": null,
+          "expected_sources": [],
+          "primary_sources": [],
+          "supporting_sources": [],
+          "retrieved_sources": [],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": "unverifiable_private_information",
+          "predicted_refusal_reason": "unverifiable_private_information",
+          "refusal_reason_correct": true,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 0.025300018023699522
+        },
+        {
+          "id": "H2-NEG-003",
+          "category": "negative_missing_benchmark",
+          "answerable": false,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": null,
+          "primary_recall_at_k": null,
+          "hit_rate_at_k": null,
+          "primary_hit_at_k": null,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": null,
+          "citation_precision_at_k": 0.0,
+          "reciprocal_rank": null,
+          "symbol_recall_at_k": null,
+          "expected_sources": [],
+          "primary_sources": [],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "docs/adr/0001-handwritten-react-loop.md",
+            "docs/architecture/overview.md",
+            "docs/architecture/knowledge-search-integration.md",
+            "mini_nanobot/__init__.py"
+          ],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": "missing_empirical_evidence",
+          "predicted_refusal_reason": "missing_empirical_evidence",
+          "refusal_reason_correct": true,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 122.4561000126414
+        },
+        {
+          "id": "H2-NEG-004",
+          "category": "negative_missing_audit",
+          "answerable": false,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": null,
+          "primary_recall_at_k": null,
+          "hit_rate_at_k": null,
+          "primary_hit_at_k": null,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": null,
+          "citation_precision_at_k": 0.0,
+          "reciprocal_rank": null,
+          "symbol_recall_at_k": null,
+          "expected_sources": [],
+          "primary_sources": [],
+          "supporting_sources": [],
+          "retrieved_sources": [
+            "docs/architecture/knowledge-search-integration.md",
+            "docs/adr/0003-one-layer-subagent.md",
+            "mini_nanobot/__init__.py"
+          ],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": "missing_independent_verification",
+          "predicted_refusal_reason": "missing_independent_verification",
+          "refusal_reason_correct": true,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 111.79059999994934
+        },
+        {
+          "id": "H2-NEG-005",
+          "category": "negative_future_commitment",
+          "answerable": false,
+          "expected_route": "out_of_scope",
+          "predicted_route": "out_of_scope",
+          "routing_correct": true,
+          "file_recall_at_k": null,
+          "primary_recall_at_k": null,
+          "hit_rate_at_k": null,
+          "primary_hit_at_k": null,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": null,
+          "citation_precision_at_k": null,
+          "reciprocal_rank": null,
+          "symbol_recall_at_k": null,
+          "expected_sources": [],
+          "primary_sources": [],
+          "supporting_sources": [],
+          "retrieved_sources": [],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": "future_commitment_not_documented",
+          "predicted_refusal_reason": "future_commitment_not_documented",
+          "refusal_reason_correct": true,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 0.049900030717253685
+        },
+        {
+          "id": "H2-NEG-006",
+          "category": "negative_production_telemetry",
+          "answerable": false,
+          "expected_route": "out_of_scope",
+          "predicted_route": "out_of_scope",
+          "routing_correct": true,
+          "file_recall_at_k": null,
+          "primary_recall_at_k": null,
+          "hit_rate_at_k": null,
+          "primary_hit_at_k": null,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": null,
+          "citation_precision_at_k": null,
+          "reciprocal_rank": null,
+          "symbol_recall_at_k": null,
+          "expected_sources": [],
+          "primary_sources": [],
+          "supporting_sources": [],
+          "retrieved_sources": [],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": "missing_production_telemetry",
+          "predicted_refusal_reason": "missing_production_telemetry",
+          "refusal_reason_correct": true,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 0.041300023440271616
+        },
+        {
+          "id": "H2-NEG-007",
+          "category": "negative_private_vendor",
+          "answerable": false,
+          "expected_route": "out_of_scope",
+          "predicted_route": "out_of_scope",
+          "routing_correct": true,
+          "file_recall_at_k": null,
+          "primary_recall_at_k": null,
+          "hit_rate_at_k": null,
+          "primary_hit_at_k": null,
+          "supporting_recall_at_k": null,
+          "ndcg_at_k": null,
+          "citation_precision_at_k": null,
+          "reciprocal_rank": null,
+          "symbol_recall_at_k": null,
+          "expected_sources": [],
+          "primary_sources": [],
+          "supporting_sources": [],
+          "retrieved_sources": [],
+          "matched_sources": [],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": "unverifiable_private_information",
+          "predicted_refusal_reason": "unverifiable_private_information",
+          "refusal_reason_correct": true,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 0.03470003139227629
+        },
+        {
+          "id": "H2-NEG-008",
+          "category": "negative_control_answerable",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "design",
+          "routing_correct": true,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.45819933371607996,
+          "citation_precision_at_k": 0.25,
+          "reciprocal_rank": 0.5,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/architecture/overview.md"
+          ],
+          "primary_sources": [
+            "docs/architecture/overview.md"
+          ],
+          "supporting_sources": [
+            "docs/evaluation/benchmark-methodology.md",
+            "docs/security/sandbox-and-permissions.md"
+          ],
+          "retrieved_sources": [
+            "docs/architecture/knowledge-search-integration.md",
+            "docs/architecture/overview.md",
+            "docs/README.md",
+            "mini_nanobot/core/state.py"
+          ],
+          "matched_sources": [
+            "docs/architecture/overview.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": "unsupported_anchor",
+          "refusal_reason_correct": null,
+          "live_verification_attempted": false,
+          "live_revision": {},
+          "live_primary_hit_at_k": null,
+          "latency_ms": 152.105399989523
+        },
+        {
+          "id": "H2-NEG-009",
+          "category": "negative_control_answerable",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "implementation",
+          "routing_correct": false,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.5,
+          "ndcg_at_k": 0.7075790686744426,
+          "citation_precision_at_k": 0.75,
+          "reciprocal_rank": 0.25,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/evaluation/benchmark-methodology.md"
+          ],
+          "primary_sources": [
+            "docs/evaluation/benchmark-methodology.md"
+          ],
+          "supporting_sources": [
+            "benchmarks/tasks.json",
+            "mini_nanobot/cli.py"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/cli.py",
+            "mini_nanobot/cli.py",
+            "mini_nanobot/cli.py#symbol:_run_bench",
+            "docs/evaluation/benchmark-methodology.md"
+          ],
+          "matched_sources": [
+            "docs/evaluation/benchmark-methodology.md"
+          ],
+          "matched_supporting_sources": [
+            "mini_nanobot/cli.py"
+          ],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "_run_bench"
+          ],
+          "matched_symbols": [],
+          "refused": true,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": "missing_empirical_evidence",
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": null,
+          "latency_ms": 881.6384999663569
+        },
+        {
+          "id": "H2-NEG-010",
+          "category": "negative_control_answerable",
+          "answerable": true,
+          "expected_route": "design",
+          "predicted_route": "implementation",
+          "routing_correct": false,
+          "file_recall_at_k": 1.0,
+          "primary_recall_at_k": 1.0,
+          "hit_rate_at_k": true,
+          "primary_hit_at_k": true,
+          "supporting_recall_at_k": 0.0,
+          "ndcg_at_k": 0.3196311965446524,
+          "citation_precision_at_k": 0.2,
+          "reciprocal_rank": 0.2,
+          "symbol_recall_at_k": null,
+          "expected_sources": [
+            "docs/evaluation/benchmark-methodology.md"
+          ],
+          "primary_sources": [
+            "docs/evaluation/benchmark-methodology.md"
+          ],
+          "supporting_sources": [
+            "benchmarks/tasks.json"
+          ],
+          "retrieved_sources": [
+            "mini_nanobot/cli.py",
+            "mini_nanobot/cli.py",
+            "mini_nanobot/memory/long_term.py#symbol:LongTermMemoryStore.recall_attachment",
+            "mini_nanobot/memory/long_term.py#symbol:LongTermMemoryStore",
+            "docs/evaluation/benchmark-methodology.md"
+          ],
+          "matched_sources": [
+            "docs/evaluation/benchmark-methodology.md"
+          ],
+          "matched_supporting_sources": [],
+          "expected_symbols": [],
+          "retrieved_symbols": [
+            "LongTermMemoryStore.recall_attachment",
+            "recall_attachment",
+            "LongTermMemoryStore"
+          ],
+          "matched_symbols": [],
+          "refused": false,
+          "expected_refusal_reason": null,
+          "predicted_refusal_reason": null,
+          "refusal_reason_correct": null,
+          "live_verification_attempted": true,
+          "live_revision": {
+            "commit_sha": "44edd149df29cd3b7982e2983d41b0486c2d5d1d",
+            "branch": "main",
+            "commit_time": "2026-07-09T21:31:57+08:00",
+            "dirty": true
+          },
+          "live_primary_hit_at_k": null,
+          "latency_ms": 967.9420000175014
+        }
+      ]
+    }
+  },
+  "deltas_from_baseline": {
+    "hybrid_live": {
+      "routing_accuracy": 0.0,
+      "routing_macro_f1": 0.0,
+      "primary_recall_at_k": 0.0,
+      "primary_hit_at_k": 0.0,
+      "supporting_recall_at_k": 0.0,
+      "ndcg_at_k": 0.0,
+      "citation_precision_at_k": 0.0,
+      "symbol_recall_at_k": 0.0,
+      "mrr": 0.0,
+      "refusal_f1": 0.0,
+      "answerable_refusal_rate": 0.0,
+      "mean_latency_ms": 0.0
+    }
+  },
+  "publication_metadata": {
+    "path_sanitized": true,
+    "raw_report_name": "e2e_holdout_first_run_build_4ae47172a9869d88ce0f.json",
+    "raw_report_sha256": "8b7b0dbf6e644b1bf3aa2afd690fb5298f8801fa89664ddb75b66644b36e5392",
+    "metrics_unchanged": true,
+    "frozen_holdout_first_run": true
+  }
+}
